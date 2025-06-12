@@ -21,3 +21,7 @@ Route::get('/subscribe', function () {
 Route::get('/contact', function () {
     return view('contact', ['title' => 'Hubungi Kami']);
 })->name('contact');
+
+Route::get('/testimonials', function () {
+    return view('testimonials', ['title' => 'Testimoni']);
+})->name('testimonials');
