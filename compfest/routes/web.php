@@ -21,3 +21,7 @@ Route::get('/contact', function () {
 Route::get('/testimonials', function () {
     return view('testimonials', ['title' => 'Testimoni']);
 })->name('testimonials');
+
+Route::get('/about', function () {
+    return view('about', ['title' => 'Tentang Kami']);
+})->name('about');

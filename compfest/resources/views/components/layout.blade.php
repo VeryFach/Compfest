@@ -138,7 +138,7 @@
                     <a href="/meal-plans" class="text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
                         Meal Plans
                     </a>
-                    <a href="/about" class="text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                    <a href="{{ route('about') }}" class="text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
                         About Us
                     </a>
                     <a href="{{ route('menu') }}" class="text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
