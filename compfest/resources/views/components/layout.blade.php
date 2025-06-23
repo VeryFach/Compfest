@@ -136,7 +136,7 @@
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex flex-1 justify-center mx-6">
                     <div class="flex space-x-6 lg:space-x-8">
-                        <a href="/meal-plans" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                        <a href="{{ route('meal-plans') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
                             Meal Plans
                         </a>
                         <a href="{{ route('about') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
@@ -145,10 +145,10 @@
                         <a href="{{ route('menu') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
                             Our Menus
                         </a>
-                        <a href="/nutrition" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                        <a href="{{ route('nutrition')}}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
                             Nutrition Info
                         </a>
-                        <a href="/delivery" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                        <a href="{{ route('delivery-area') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
                             Delivery Areas
                         </a>
                     </div>
@@ -178,12 +178,11 @@
         <!-- Mobile Navigation -->
         <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
             <div class="px-4 pt-2 pb-4 space-y-1">
-                <a href="/meal-plans" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Meal Plans</a>
-                <a href="/about" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">About Us</a>
-                <a href="/menus" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Our Menus</a>
-                <a href="/nutrition" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Nutrition Info</a>
-                <a href="/delivery" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Delivery Areas</a>
-                <a href="/corporate" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Corporate Orders</a>
+                <a href="{{ route('meal-plans') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Meal Plans</a>
+                <a href="{{ route('about') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">About Us</a>
+                <a href="{{ route('menu') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Our Menus</a>
+                <a href="{{ route('nutrition') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Nutrition Info</a>
+                <a href="{{ route('delivery-area') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Delivery Areas</a>
                 <div class="pt-2 border-t border-gray-200">
                     <a href="/login" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Log in</a>
                     <a href="/register" class="block px-3 py-3 rounded-md text-base font-medium text-center text-white bg-emerald-500 hover:bg-emerald-600">Sign Up</a>
@@ -254,20 +253,17 @@
                 <div class="footer-card">
                     <h3 class="text-lg font-semibold mb-6 text-emerald-400">Link Cepat</h3>
                     <ul class="space-y-3">
-                        <li><a href="/meal-plans" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
-                            <span>Paket Makanan</span>
+                        <li><a href="{{ route('meal-plans') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                            <span>Meal Plans</span>
                         </a></li>
                         <li><a href="{{ route('menu') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
-                            <span>Menu Kami</span>
+                            <span>Menu</span>
                         </a></li>
-                        <li><a href="/nutrition" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                        <li><a href="{{ route('nutrition') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
                             <span>Panduan Nutrisi</span>
                         </a></li>
-                        <li><a href="/delivery" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                        <li><a href="{{ route('delivery-area') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
                             <span>Area Pengiriman</span>
-                        </a></li>
-                        <li><a href="/corporate" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
-                            <span>Pesanan Korporat</span>
                         </a></li>
                     </ul>
                 </div>

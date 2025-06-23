@@ -25,3 +25,19 @@ Route::get('/testimonials', function () {
 Route::get('/about', function () {
     return view('about', ['title' => 'Tentang Kami']);
 })->name('about');
+
+Route::get('/delivery', function () {
+    return view('delivery', ['title' => 'Pengiriman']);
+})->name('delivery');
+
+Route::get('/nutrition', function () {
+    return view('nutrition', ['title' => 'Nutrisi Info']);
+})->name('nutrition');
+
+Route::get('/meal-plans', function () {
+    return view('meal-plans', ['title' => 'Rencana Makan']);
+})->name('meal-plans');
+
+Route::get('/delivery-area', function () {
+    return view('delivery-area', ['title' => 'FAQ']);
+})->name('delivery-area');
