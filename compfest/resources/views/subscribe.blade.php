@@ -1,195 +1,86 @@
 <x-layout title="Berlangganan">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .checkbox-custom {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+        .checkbox-custom:checked {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+        }
+        .checkbox-custom:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .price-display {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        .plan-card {
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .plan-card.selected {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-800 to-blue-900 py-16 text-white">
+    <section class="gradient-bg py-16 text-white">
         <div class="container mx-auto px-4">
-            <div class="max-w-3xl mx-auto text-center">
+            <div class="max-w-4xl mx-auto text-center">
                 <h1 class="text-4xl md:text-5xl font-bold mb-6">Berlangganan SEA Catering</h1>
-                <p class="text-xl text-blue-100">Pilih paket berlangganan yang sesuai dengan kebutuhan Anda dan nikmati kemudahan setiap hari</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Subscription Plans -->
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Pilih Durasi Berlangganan</h2>
-                <p class="text-gray-600">Semakin lama berlangganan, semakin hemat harga yang Anda dapatkan</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- 1 Week Plan -->
-                <div class="relative">
-                    <div class="h-full bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                        <div class="px-6 py-8">
-                            <div class="text-center mb-6">
-                                <h3 class="text-2xl font-bold text-gray-800 mb-1">Paket Mingguan</h3>
-                                <p class="text-gray-500 text-sm">Coba dulu selama 1 minggu</p>
-                            </div>
-                            
-                            <div class="text-center mb-8">
-                                <span class="block text-blue-600 text-lg mb-1">Mulai dari</span>
-                                <span class="text-4xl font-bold text-gray-900">Rp 175.000</span>
-                                <span class="block text-gray-500 text-sm mt-1">untuk 7 hari</span>
-                            </div>
-                            
-                            <ul class="space-y-3 mb-8">
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">7 hari makanan</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">Antar setiap hari</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">Bisa ganti paket</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">Customer support</span>
-                                </li>
-                            </ul>
-                            
-                            <button onclick="selectPlan('weekly')" class="w-full py-3 px-6 border-2 border-blue-600 text-blue-600 font-medium rounded-lg hover:bg-blue-50 transition-colors duration-300">
-                                Pilih Paket Ini
-                            </button>
-                        </div>
+                <p class="text-xl text-blue-100 mb-8">Nikmati makanan sehat berkualitas tinggi dengan sistem berlangganan yang fleksibel</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-white/10 rounded-lg p-4">
+                        <div class="text-3xl mb-2">🍽️</div>
+                        <h3 class="font-semibold">Makanan Berkualitas</h3>
+                        <p class="text-sm text-blue-100">Bahan segar dan bergizi</p>
                     </div>
-                </div>
-
-                <!-- 1 Month Plan (Popular) -->
-                <div class="relative">
-                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                        <span class="bg-blue-600 text-white text-xs font-semibold px-4 py-1 rounded-full">TERPOPULER</span>
+                    <div class="bg-white/10 rounded-lg p-4">
+                        <div class="text-3xl mb-2">🚚</div>
+                        <h3 class="font-semibold">Pengiriman Tepat Waktu</h3>
+                        <p class="text-sm text-blue-100">Antar langsung ke lokasi Anda</p>
                     </div>
-                    
-                    <div class="h-full bg-white rounded-xl shadow-xl overflow-hidden border-2 border-blue-600 transition-all duration-300 hover:-translate-y-2">
-                        <div class="px-6 py-8">
-                            <div class="text-center mb-6">
-                                <h3 class="text-2xl font-bold text-gray-800 mb-1">Paket Bulanan</h3>
-                                <p class="text-blue-600 text-sm">Hemat 15% dari harga mingguan</p>
-                            </div>
-                            
-                            <div class="text-center mb-8">
-                                <span class="block text-blue-600 text-lg mb-1">Mulai dari</span>
-                                <span class="text-4xl font-bold text-gray-900">Rp 637.500</span>
-                                <span class="block text-gray-500 text-sm mt-1">untuk 30 hari</span>
-                                <span class="text-green-600 text-sm mt-1">
-                                    <del class="text-gray-400">Rp 750.000</del> Hemat Rp 112.500
-                                </span>
-                            </div>
-                            
-                            <ul class="space-y-3 mb-8">
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">30 hari makanan</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">Antar setiap hari</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">Bebas ganti paket</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">Priority support</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-yellow-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">Free ongkir</span>
-                                </li>
-                            </ul>
-                            
-                            <button onclick="selectPlan('monthly')" class="w-full py-3 px-6 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-300">
-                                Pilih Paket Ini
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3 Month Plan -->
-                <div class="relative">
-                    <div class="h-full bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                        <div class="px-6 py-8">
-                            <div class="text-center mb-6">
-                                <h3 class="text-2xl font-bold text-gray-800 mb-1">Paket 3 Bulan</h3>
-                                <p class="text-green-600 text-sm">Hemat 25% + Bonus</p>
-                            </div>
-                            
-                            <div class="text-center mb-8">
-                                <span class="block text-blue-600 text-lg mb-1">Mulai dari</span>
-                                <span class="text-4xl font-bold text-gray-900">Rp 1.687.500</span>
-                                <span class="block text-gray-500 text-sm mt-1">untuk 90 hari</span>
-                                <span class="text-green-600 text-sm mt-1">
-                                    <del class="text-gray-400">Rp 2.250.000</del> Hemat Rp 562.500
-                                </span>
-                            </div>
-                            
-                            <ul class="space-y-3 mb-8">
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">90 hari makanan</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">Antar setiap hari</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">Bebas ganti paket</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">VIP support</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-yellow-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">Free ongkir</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <svg class="w-5 h-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    <span class="text-gray-700">Bonus snack</span>
-                                </li>
-                            </ul>
-                            
-                            <button onclick="selectPlan('quarterly')" class="w-full py-3 px-6 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors duration-300">
-                                Pilih Paket Ini
-                            </button>
-                        </div>
+                    <div class="bg-white/10 rounded-lg p-4">
+                        <div class="text-3xl mb-2">💰</div>
+                        <h3 class="font-semibold">Harga Terjangkau</h3>
+                        <p class="text-sm text-blue-100">Paket berlangganan hemat</p>
                     </div>
                 </div>
             </div>
@@ -197,524 +88,525 @@
     </section>
 
     <!-- Subscription Form -->
-    <section class="py-16 bg-gray-100" id="subscriptionForm" style="display: none;">
+    <section class="py-16">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="bg-blue-600 px-6 py-4 text-white">
-                        <h4 class="text-xl font-semibold flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                            </svg>
-                            Form Berlangganan
-                        </h4>
+                    <div class="gradient-bg px-6 py-4 text-white">
+                        <h2 class="text-2xl font-bold">Form Berlangganan</h2>
+                        <p class="text-blue-100">Isi form di bawah untuk memulai berlangganan</p>
                     </div>
                     
-                    <div class="p-6">
-                        <form id="subscribeForm">
-                            <!-- Step 1: Personal Info -->
-                            <div class="step-content" id="step1">
-                                <h5 class="text-lg font-semibold text-gray-800 mb-4">Informasi Pribadi</h5>
-                                
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                    <div>
-                                        <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap *</label>
-                                        <input type="text" id="fullName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
-                                    </div>
-                                    <div>
-                                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                                        <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
-                                    </div>
+                    <form id="subscriptionForm" class="p-8 space-y-8">
+                        <!-- Personal Information -->
+                        <div class="space-y-6">
+                            <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Informasi Pribadi</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="fullName" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Nama Lengkap <span class="text-red-500">*</span>
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="fullName" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                        required
+                                        placeholder="Masukkan nama lengkap Anda"
+                                    >
+                                    <div class="error-message" id="fullNameError"></div>
                                 </div>
                                 
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                    <div>
-                                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">No. Telepon *</label>
-                                        <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
-                                    </div>
-                                    <div>
-                                        <label for="birthDate" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Lahir</label>
-                                        <input type="date" id="birthDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-4">
-                                    <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Alamat Lengkap *</label>
-                                    <textarea id="address" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required placeholder="Masukkan alamat lengkap untuk pengiriman"></textarea>
-                                </div>
-                            </div>
-
-                            <!-- Step 2: Package Selection -->
-                            <div class="step-content hidden" id="step2">
-                                <h5 class="text-lg font-semibold text-gray-800 mb-4">Pilih Paket Makanan</h5>
-                                
-                                <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-6">
-                                    <h6 class="font-medium text-gray-800">Durasi Berlangganan: <span id="selectedPlan" class="text-blue-600"></span></h6>
-                                    <p class="text-gray-700">Total Biaya: <span id="totalCost" class="font-bold text-green-600"></span></p>
-                                </div>
-                                
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                    <div>
-                                        <label for="packageType" class="block text-sm font-medium text-gray-700 mb-1">Jenis Paket *</label>
-                                        <select id="packageType" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
-                                            <option value="">Pilih Paket</option>
-                                            <option value="ekonomis" data-price="25000">Paket Ekonomis - Rp 25.000/hari</option>
-                                            <option value="premium" data-price="45000">Paket Premium - Rp 45.000/hari</option>
-                                            <option value="vegetarian" data-price="35000">Paket Vegetarian - Rp 35.000/hari</option>
-                                            <option value="diet" data-price="40000">Paket Diet - Rp 40.000/hari</option>
-                                            <option value="keluarga" data-price="90000">Paket Keluarga - Rp 90.000/hari</option>
-                                            <option value="anak" data-price="20000">Paket Anak - Rp 20.000/hari</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="startDate" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Mulai *</label>
-                                        <input type="date" id="startDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
-                                    </div>
-                                </div>
-                                
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                    <div>
-                                        <label for="deliveryTime" class="block text-sm font-medium text-gray-700 mb-1">Waktu Pengiriman *</label>
-                                        <select id="deliveryTime" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
-                                            <option value="">Pilih Waktu</option>
-                                            <option value="07:00">07:00 - 08:00</option>
-                                            <option value="11:00">11:00 - 12:00</option>
-                                            <option value="17:00">17:00 - 18:00</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="specialRequest" class="block text-sm font-medium text-gray-700 mb-1">Permintaan Khusus</label>
-                                        <input type="text" id="specialRequest" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Contoh: Tidak pedas, extra nasi">
-                                    </div>
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Nomor Telepon Aktif <span class="text-red-500">*</span>
+                                    </label>
+                                    <input 
+                                        type="tel" 
+                                        id="phone" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                        required
+                                        placeholder="08123456789"
+                                        pattern="[0-9]{10,13}"
+                                    >
+                                    <div class="error-message" id="phoneError"></div>
                                 </div>
                             </div>
 
-                            <!-- Step 3: Payment -->
-                            <div class="step-content hidden" id="step3">
-                                <h5 class="text-lg font-semibold text-gray-800 mb-4">Metode Pembayaran</h5>
-                                
-                                <div class="border border-gray-200 rounded-lg p-4 mb-6">
-                                    <h6 class="font-medium text-gray-800 border-b pb-2 mb-3">Ringkasan Pesanan</h6>
-                                    <div class="flex justify-between mb-2">
-                                        <span class="text-gray-600">Paket:</span>
-                                        <span id="summaryPackage" class="text-gray-800">-</span>
-                                    </div>
-                                    <div class="flex justify-between mb-2">
-                                        <span class="text-gray-600">Durasi:</span>
-                                        <span id="summaryDuration" class="text-gray-800">-</span>
-                                    </div>
-                                    <div class="flex justify-between mb-2">
-                                        <span class="text-gray-600">Mulai:</span>
-                                        <span id="summaryStartDate" class="text-gray-800">-</span>
-                                    </div>
-                                    <hr class="my-3">
-                                    <div class="flex justify-between font-semibold">
-                                        <span class="text-gray-800">Total:</span>
-                                        <span id="summaryTotal" class="text-green-600">-</span>
-                                    </div>
-                                </div>
+                            <div>
+                                <label for="allergies" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Alergi / Pantangan Makanan
+                                </label>
+                                <textarea 
+                                    id="allergies" 
+                                    rows="3"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                    placeholder="Contoh: Alergi kacang, tidak bisa pedas, vegetarian, dll."
+                                ></textarea>
+                            </div>
+                        </div>
 
-                                <div class="mb-6">
-                                    <h6 class="font-medium text-gray-800 mb-3">Pilih Metode Pembayaran</h6>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div class="payment-option">
-                                            <input type="radio" name="paymentMethod" id="bankTransfer" value="bank_transfer" class="hidden peer">
-                                            <label for="bankTransfer" class="block p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 peer-checked:border-blue-500 peer-checked:bg-blue-50">
-                                                <div class="flex items-center">
-                                                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                                                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
-                                                        </svg>
-                                                    </div>
-                                                    <div>
-                                                        <div class="font-medium">Transfer Bank</div>
-                                                        <div class="text-sm text-gray-500">BCA, BNI, Mandiri, BRI</div>
-                                                    </div>
-                                                </div>
-                                            </label>
+                        <!-- Plan Selection -->
+                        <div class="space-y-6">
+                            <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Pilih Paket <span class="text-red-500">*</span></h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="plan-card bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 cursor-pointer" data-plan="diet" data-price="30000">
+                                    <div class="text-center">
+                                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <span class="text-2xl text-white">🥗</span>
                                         </div>
-                                        <div class="payment-option">
-                                            <input type="radio" name="paymentMethod" id="eWallet" value="e_wallet" class="hidden peer">
-                                            <label for="eWallet" class="block p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 peer-checked:border-blue-500 peer-checked:bg-blue-50">
-                                                <div class="flex items-center">
-                                                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                                                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                                        </svg>
-                                                    </div>
-                                                    <div>
-                                                        <div class="font-medium">E-Wallet</div>
-                                                        <div class="text-sm text-gray-500">GoPay, OVO, DANA</div>
-                                                    </div>
-                                                </div>
-                                            </label>
+                                        <h4 class="text-xl font-bold text-gray-800 mb-2">Diet Plan</h4>
+                                        <div class="text-2xl font-bold text-green-600 mb-2">Rp 30.000</div>
+                                        <p class="text-sm text-gray-600 mb-4">per makanan</p>
+                                        <ul class="text-sm text-gray-600 space-y-1">
+                                            <li>• Rendah kalori</li>
+                                            <li>• Sayuran segar</li>
+                                            <li>• Protein lean</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="plan-card bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 cursor-pointer" data-plan="protein" data-price="40000">
+                                    <div class="text-center">
+                                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <span class="text-2xl text-white">🍖</span>
                                         </div>
+                                        <h4 class="text-xl font-bold text-gray-800 mb-2">Protein Plan</h4>
+                                        <div class="text-2xl font-bold text-blue-600 mb-2">Rp 40.000</div>
+                                        <p class="text-sm text-gray-600 mb-4">per makanan</p>
+                                        <ul class="text-sm text-gray-600 space-y-1">
+                                            <li>• High protein</li>
+                                            <li>• Daging berkualitas</li>
+                                            <li>• Fitness friendly</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="plan-card bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 cursor-pointer" data-plan="royal" data-price="60000">
+                                    <div class="text-center">
+                                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <span class="text-2xl text-white">👑</span>
+                                        </div>
+                                        <h4 class="text-xl font-bold text-gray-800 mb-2">Royal Plan</h4>
+                                        <div class="text-2xl font-bold text-purple-600 mb-2">Rp 60.000</div>
+                                        <p class="text-sm text-gray-600 mb-4">per makanan</p>
+                                        <ul class="text-sm text-gray-600 space-y-1">
+                                            <li>• Premium ingredients</li>
+                                            <li>• Gourmet style</li>
+                                            <li>• Luxury experience</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
+                            <div class="error-message" id="planError"></div>
+                        </div>
 
-                            <!-- Navigation Buttons -->
-                            <div class="flex justify-between pt-4 border-t border-gray-200">
-                                <button type="button" id="prevBtn" onclick="changeStep(-1)" class="hidden items-center px-5 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
-                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                                    </svg>
-                                    Sebelumnya
-                                </button>
-                                <button type="button" id="nextBtn" onclick="changeStep(1)" class="ml-auto flex items-center px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                                    Selanjutnya
-                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                    </svg>
-                                </button>
-                                <button type="submit" id="submitBtn" class="hidden ml-auto flex items-center px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
-                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Meal Types -->
+                        <div class="space-y-6">
+                            <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Jenis Makanan <span class="text-red-500">*</span></h3>
+                            <p class="text-gray-600">Pilih minimal satu jenis makanan</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                                    <input type="checkbox" class="checkbox-custom mr-3" name="mealType" value="breakfast">
+                                    <div class="flex items-center">
+                                        <span class="text-2xl mr-3">🌅</span>
+                                        <span class="font-medium">Sarapan</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                                    <input type="checkbox" class="checkbox-custom mr-3" name="mealType" value="lunch">
+                                    <div class="flex items-center">
+                                        <span class="text-2xl mr-3">☀️</span>
+                                        <span class="font-medium">Makan Siang</span>
+                                    </div>
+                                </label>
+                                
+                                <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                                    <input type="checkbox" class="checkbox-custom mr-3" name="mealType" value="dinner">
+                                    <div class="flex items-center">
+                                        <span class="text-2xl mr-3">🌙</span>
+                                        <span class="font-medium">Makan Malam</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="error-message" id="mealTypeError"></div>
+                        </div>
+
+                        <!-- Delivery Days -->
+                        <div class="space-y-6">
+                            <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Hari Pengiriman <span class="text-red-500">*</span></h3>
+                            <p class="text-gray-600">Pilih hari-hari untuk pengiriman makanan</p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+                                <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                                    <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="monday">
+                                    <span class="text-sm font-medium">Senin</span>
+                                </label>
+                                
+                                <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                                    <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="tuesday">
+                                    <span class="text-sm font-medium">Selasa</span>
+                                </label>
+                                
+                                <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                                    <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="wednesday">
+                                    <span class="text-sm font-medium">Rabu</span>
+                                </label>
+                                
+                                <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                                    <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="thursday">
+                                    <span class="text-sm font-medium">Kamis</span>
+                                </label>
+                                
+                                <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                                    <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="friday">
+                                    <span class="text-sm font-medium">Jumat</span>
+                                </label>
+                                
+                                <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                                    <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="saturday">
+                                    <span class="text-sm font-medium">Sabtu</span>
+                                </label>
+                                
+                                <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                                    <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="sunday">
+                                    <span class="text-sm font-medium">Minggu</span>
+                                </label>
+                            </div>
+                            <div class="error-message" id="deliveryDayError"></div>
+                        </div>
+
+                        <!-- Price Calculator -->
+                        <div class="bg-gray-50 rounded-xl p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Kalkulasi Harga</h3>
+                            <div class="space-y-3 text-sm text-gray-600">
+                                <div class="flex justify-between">
+                                    <span>Paket yang dipilih:</span>
+                                    <span id="selectedPlanDisplay">-</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Jumlah jenis makanan:</span>
+                                    <span id="mealTypesCount">0</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Jumlah hari pengiriman:</span>
+                                    <span id="deliveryDaysCount">0</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Minggu per bulan:</span>
+                                    <span>4.3</span>
+                                </div>
+                                <hr class="my-3">
+                                <div class="flex justify-between font-medium">
+                                    <span>Rumus:</span>
+                                    <span id="calculationFormula">Harga × Jenis × Hari × 4.3</span>
+                                </div>
+                            </div>
+                            <div class="price-display" id="totalPrice">
+                                Rp 0
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="pt-6 border-t">
+                            <button 
+                                type="submit" 
+                                class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold py-4 px-6 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+                                id="submitBtn"
+                            >
+                                <span class="flex items-center justify-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
-                                    Konfirmasi Berlangganan
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                                    Mulai Berlangganan
+                                </span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Pertanyaan yang Sering Diajukan</h2>
-                
-                <div class="space-y-4">
-                    <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="flex items-center justify-between w-full p-4 text-left bg-gray-50 hover:bg-gray-100" onclick="toggleFAQ(1)">
-                            <span class="font-medium text-gray-800">Apakah bisa mengubah paket di tengah berlangganan?</span>
-                            <svg id="faqIcon1" class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div id="faqContent1" class="hidden p-4 text-gray-600">
-                            Ya, Anda bisa mengubah paket makanan dengan memberitahu kami minimal H-1 sebelum pengiriman. Perbedaan harga akan disesuaikan pada tagihan berikutnya.
-                        </div>
-                    </div>
-                    
-                    <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="flex items-center justify-between w-full p-4 text-left bg-gray-50 hover:bg-gray-100" onclick="toggleFAQ(2)">
-                            <span class="font-medium text-gray-800">Bagaimana jika saya tidak ada di rumah saat pengiriman?</span>
-                            <svg id="faqIcon2" class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div id="faqContent2" class="hidden p-4 text-gray-600">
-                            Kami akan menghubungi Anda terlebih dahulu sebelum pengiriman. Jika tidak ada, makanan akan dititipkan kepada tetangga atau security dengan pemberitahuan melalui WhatsApp.
-                        </div>
-                    </div>
-                    
-                    <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="flex items-center justify-between w-full p-4 text-left bg-gray-50 hover:bg-gray-100" onclick="toggleFAQ(3)">
-                            <span class="font-medium text-gray-800">Apakah ada jaminan jika makanan tidak sesuai?</span>
-                            <svg id="faqIcon3" class="w-5 h-5 text-gray-500 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div id="faqContent3" class="hidden p-4 text-gray-600">
-                            Kami memiliki jaminan 100% kepuasan pelanggan. Jika makanan tidak sesuai atau ada masalah, kami akan menggantinya tanpa biaya tambahan.
-                        </div>
-                    </div>
-                </div>
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-8 max-w-md mx-4 text-center">
+            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
             </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Berlangganan Berhasil!</h3>
+            <p class="text-gray-600 mb-6">Terima kasih telah berlangganan SEA Catering. Tim kami akan menghubungi Anda segera untuk konfirmasi.</p>
+            <button onclick="closeModal()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                Tutup
+            </button>
         </div>
-    </section>
+    </div>
 
     @push('scripts')
     <script>
-        let currentStep = 1;
-        let selectedPlanType = '';
-        let planPrices = {
-            'weekly': { 
-                days: 7, 
-                discount: 0,
-                label: 'Paket Mingguan (7 hari)'
-            },
-            'monthly': { 
-                days: 30, 
-                discount: 0.15,
-                label: 'Paket Bulanan (30 hari)'
-            },
-            'quarterly': { 
-                days: 90, 
-                discount: 0.25,
-                label: 'Paket 3 Bulan (90 hari)'
-            }
+        // State variables
+        let selectedPlan = null;
+        let selectedPlanPrice = 0;
+        let selectedMealTypes = [];
+        let selectedDeliveryDays = [];
+
+        // Plan data
+        const plans = {
+            diet: { name: 'Diet Plan', price: 30000 },
+            protein: { name: 'Protein Plan', price: 40000 },
+            royal: { name: 'Royal Plan', price: 60000 }
         };
 
-        // Toggle FAQ item
-        function toggleFAQ(id) {
-            const content = document.getElementById(`faqContent${id}`);
-            const icon = document.getElementById(`faqIcon${id}`);
+        // Initialize form
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            calculatePrice();
+        });
+
+        function setupEventListeners() {
+            // Plan selection
+            document.querySelectorAll('.plan-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    selectPlan(this);
+                });
+            });
+
+            // Meal type checkboxes
+            document.querySelectorAll('input[name="mealType"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateMealTypes();
+                    calculatePrice();
+                });
+            });
+
+            // Delivery day checkboxes
+            document.querySelectorAll('input[name="deliveryDay"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateDeliveryDays();
+                    calculatePrice();
+                });
+            });
+
+            // Form submission
+            document.getElementById('subscriptionForm').addEventListener('submit', handleSubmit);
+
+            // Real-time validation
+            document.getElementById('fullName').addEventListener('blur', validateName);
+            document.getElementById('phone').addEventListener('blur', validatePhone);
+        }
+
+        function selectPlan(planCard) {
+            // Remove previous selection
+            document.querySelectorAll('.plan-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            // Add selection to clicked card
+            planCard.classList.add('selected');
+
+            // Update selected plan
+            selectedPlan = planCard.dataset.plan;
+            selectedPlanPrice = parseInt(planCard.dataset.price);
+
+            // Update display
+            updatePlanDisplay();
+            calculatePrice();
+            clearError('planError');
+        }
+
+        function updateMealTypes() {
+            selectedMealTypes = [];
+            document.querySelectorAll('input[name="mealType"]:checked').forEach(checkbox => {
+                selectedMealTypes.push(checkbox.value);
+            });
             
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.classList.add('rotate-180');
+            document.getElementById('mealTypesCount').textContent = selectedMealTypes.length;
+            clearError('mealTypeError');
+        }
+
+        function updateDeliveryDays() {
+            selectedDeliveryDays = [];
+            document.querySelectorAll('input[name="deliveryDay"]:checked').forEach(checkbox => {
+                selectedDeliveryDays.push(checkbox.value);
+            });
+            
+            document.getElementById('deliveryDaysCount').textContent = selectedDeliveryDays.length;
+            clearError('deliveryDayError');
+        }
+
+        function updatePlanDisplay() {
+            const planDisplay = document.getElementById('selectedPlanDisplay');
+            if (selectedPlan) {
+                planDisplay.textContent = `${plans[selectedPlan].name} (Rp ${selectedPlanPrice.toLocaleString('id-ID')})`;
             } else {
-                content.classList.add('hidden');
-                icon.classList.remove('rotate-180');
+                planDisplay.textContent = '-';
             }
         }
 
-        // Fungsi untuk memilih paket berlangganan
-        function selectPlan(planType) {
-            selectedPlanType = planType;
-            document.getElementById('selectedPlan').textContent = planPrices[planType].label;
-            
-            // Show form and scroll to it
-            const formSection = document.getElementById('subscriptionForm');
-            formSection.style.display = 'block';
-            formSection.scrollIntoView({ behavior: 'smooth' });
-            
-            updateTotalCost();
-        }
+        function calculatePrice() {
+            const mealTypesCount = selectedMealTypes.length;
+            const deliveryDaysCount = selectedDeliveryDays.length;
+            const weekMultiplier = 4.3;
 
-        // Fungsi untuk mengubah step form
-        function changeStep(direction) {
-            if (direction === 1 && !validateCurrentStep()) {
-                return;
+            let totalPrice = 0;
+            if (selectedPlanPrice > 0 && mealTypesCount > 0 && deliveryDaysCount > 0) {
+                totalPrice = selectedPlanPrice * mealTypesCount * deliveryDaysCount * weekMultiplier;
             }
 
-            // Hide current step
-            document.getElementById(`step${currentStep}`).classList.add('hidden');
+            // Update price display
+            document.getElementById('totalPrice').textContent = `Rp ${Math.round(totalPrice).toLocaleString('id-ID')}`;
             
-            currentStep += direction;
-            
-            // Ensure step stays within bounds
-            if (currentStep < 1) currentStep = 1;
-            if (currentStep > 3) currentStep = 3;
-            
-            // Show new step
-            document.getElementById(`step${currentStep}`).classList.remove('hidden');
-            
-            updateNavigationButtons();
-            
-            if (currentStep === 3) {
-                updateOrderSummary();
-            }
+            // Update formula display
+            const formula = `${selectedPlanPrice.toLocaleString('id-ID')} × ${mealTypesCount} × ${deliveryDaysCount} × 4.3`;
+            document.getElementById('calculationFormula').textContent = formula;
         }
 
-        // Fungsi untuk memvalidasi step saat ini
-        function validateCurrentStep() {
-            const currentStepElement = document.getElementById(`step${currentStep}`);
-            const requiredFields = currentStepElement.querySelectorAll('[required]');
+        function validateName() {
+            const nameInput = document.getElementById('fullName');
+            const name = nameInput.value.trim();
+            
+            if (name.length < 2) {
+                showError('fullNameError', 'Nama harus terdiri dari minimal 2 karakter');
+                return false;
+            }
+            
+            clearError('fullNameError');
+            return true;
+        }
+
+        function validatePhone() {
+            const phoneInput = document.getElementById('phone');
+            const phone = phoneInput.value.trim();
+            const phoneRegex = /^[0-9]{10,13}$/;
+            
+            if (!phoneRegex.test(phone)) {
+                showError('phoneError', 'Nomor telepon harus terdiri dari 10-13 digit angka');
+                return false;
+            }
+            
+            clearError('phoneError');
+            return true;
+        }
+
+        function validateForm() {
             let isValid = true;
-            
-            for (let field of requiredFields) {
-                if (!field.value.trim()) {
-                    field.focus();
-                    field.classList.add('border-red-500');
-                    field.classList.remove('border-gray-300');
-                    
-                    // Add error message if not exists
-                    if (!field.nextElementSibling || !field.nextElementSibling.classList.contains('text-red-500')) {
-                        const errorDiv = document.createElement('div');
-                        errorDiv.className = 'mt-1 text-sm text-red-500';
-                        errorDiv.textContent = 'Field ini wajib diisi';
-                        field.parentNode.insertBefore(errorDiv, field.nextSibling);
-                    }
-                    
-                    isValid = false;
-                } else {
-                    field.classList.remove('border-red-500');
-                    field.classList.add('border-gray-300');
-                    
-                    // Remove error message if exists
-                    if (field.nextElementSibling && field.nextElementSibling.classList.contains('text-red-500')) {
-                        field.nextElementSibling.remove();
-                    }
-                }
+
+            // Validate name
+            if (!validateName()) {
+                isValid = false;
             }
-            
+
+            // Validate phone
+            if (!validatePhone()) {
+                isValid = false;
+            }
+
+            // Validate plan selection
+            if (!selectedPlan) {
+                showError('planError', 'Silakan pilih salah satu paket berlangganan');
+                isValid = false;
+            }
+
+            // Validate meal types
+            if (selectedMealTypes.length === 0) {
+                showError('mealTypeError', 'Silakan pilih minimal satu jenis makanan');
+                isValid = false;
+            }
+
+            // Validate delivery days
+            if (selectedDeliveryDays.length === 0) {
+                showError('deliveryDayError', 'Silakan pilih minimal satu hari pengiriman');
+                isValid = false;
+            }
+
             return isValid;
         }
 
-        // Fungsi untuk mengupdate tombol navigasi
-        function updateNavigationButtons() {
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const submitBtn = document.getElementById('submitBtn');
-            
-            // Show/hide previous button
-            if (currentStep === 1) {
-                prevBtn.classList.add('hidden');
-            } else {
-                prevBtn.classList.remove('hidden');
-                prevBtn.classList.add('flex');
-            }
-            
-            // Show/hide next and submit buttons
-            if (currentStep === 3) {
-                nextBtn.classList.add('hidden');
-                submitBtn.classList.remove('hidden');
-                submitBtn.classList.add('flex');
-            } else {
-                nextBtn.classList.remove('hidden');
-                nextBtn.classList.add('flex');
-                submitBtn.classList.add('hidden');
-            }
-        }
-
-        // Fungsi untuk mengupdate total biaya
-        function updateTotalCost() {
-            const packageSelect = document.getElementById('packageType');
-            if (packageSelect.value && selectedPlanType) {
-                const selectedOption = packageSelect.selectedOptions[0];
-                const dailyPrice = parseInt(selectedOption.dataset.price);
-                const planInfo = planPrices[selectedPlanType];
-                const totalDays = planInfo.days;
-                const discount = planInfo.discount;
-                
-                const subtotal = dailyPrice * totalDays;
-                const discountAmount = subtotal * discount;
-                const total = subtotal - discountAmount;
-                
-                document.getElementById('totalCost').textContent = `Rp ${total.toLocaleString('id-ID')}`;
-            }
-        }
-
-        // Fungsi untuk mengupdate ringkasan pesanan
-        function updateOrderSummary() {
-            const packageSelect = document.getElementById('packageType');
-            const startDate = document.getElementById('startDate').value;
-            
-            if (packageSelect.value) {
-                const selectedOption = packageSelect.selectedOptions[0];
-                document.getElementById('summaryPackage').textContent = selectedOption.text;
-                document.getElementById('summaryDuration').textContent = planPrices[selectedPlanType].label;
-                document.getElementById('summaryStartDate').textContent = new Date(startDate).toLocaleDateString('id-ID');
-                document.getElementById('summaryTotal').textContent = document.getElementById('totalCost').textContent;
-            }
-        }
-
-        // Event listener untuk perubahan paket
-        document.getElementById('packageType').addEventListener('change', function() {
-            updateTotalCost();
-        });
-
-        // Fungsi untuk submit form
-        document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+        function handleSubmit(e) {
             e.preventDefault();
-            
-            // Validate payment method
-            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
-            if (!paymentMethod) {
-                alert('Silakan pilih metode pembayaran');
+
+            if (!validateForm()) {
+                // Scroll to first error
+                const firstError = document.querySelector('.error-message:not(:empty)');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
                 return;
             }
-            
-            // Collect form data
-            const formData = {
-                personalInfo: {
-                    fullName: document.getElementById('fullName').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    birthDate: document.getElementById('birthDate').value,
-                    address: document.getElementById('address').value
-                },
-                subscription: {
-                    planType: selectedPlanType,
-                    packageType: document.getElementById('packageType').value,
-                    startDate: document.getElementById('startDate').value,
-                    deliveryTime: document.getElementById('deliveryTime').value,
-                    specialRequest: document.getElementById('specialRequest').value
-                },
-                payment: {
-                    method: paymentMethod.value,
-                    total: document.getElementById('summaryTotal').textContent
-                }
-            };
-            
+
             // Show loading state
             const submitBtn = document.getElementById('submitBtn');
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Memproses...';
+            submitBtn.innerHTML = `
+                <span class="flex items-center justify-center">
+                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Memproses...
+                </span>
+            `;
             submitBtn.disabled = true;
-            
+
             // Simulate form submission
             setTimeout(() => {
-                alert('Berlangganan berhasil! Kami akan menghubungi Anda untuk konfirmasi pembayaran.');
-                
-                // Reset form
-                document.getElementById('subscribeForm').reset();
-                document.getElementById('subscriptionForm').style.display = 'none';
-                currentStep = 1;
-                selectedPlanType = '';
-                
                 // Reset button
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
-                
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Show success modal
+                document.getElementById('successModal').classList.remove('hidden');
+
+                // Reset form
+                document.getElementById('subscriptionForm').reset();
+                resetFormState();
             }, 2000);
-        });
+        }
 
-        // Set minimum date for start date (tomorrow)
-        document.addEventListener('DOMContentLoaded', function() {
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            document.getElementById('startDate').min = tomorrow.toISOString().split('T')[0];
-        });
+        function resetFormState() {
+            selectedPlan = null;
+            selectedPlanPrice = 0;
+            selectedMealTypes = [];
+            selectedDeliveryDays = [];
 
-        // Add real-time validation feedback
-        document.querySelectorAll('input[required], select[required], textarea[required]').forEach(field => {
-            field.addEventListener('blur', function() {
-                if (this.value.trim()) {
-                    this.classList.remove('border-red-500');
-                    this.classList.add('border-green-500');
-                    
-                    // Remove error message if exists
-                    if (this.nextElementSibling && this.nextElementSibling.classList.contains('text-red-500')) {
-                        this.nextElementSibling.remove();
-                    }
-                } else {
-                    this.classList.add('border-red-500');
-                    this.classList.remove('border-green-500');
-                }
+            // Reset visual states
+            document.querySelectorAll('.plan-card').forEach(card => {
+                card.classList.remove('selected');
             });
-            
-            field.addEventListener('focus', function() {
-                this.classList.remove('border-red-500', 'border-green-500');
-                this.classList.add('border-blue-500');
+
+            // Reset displays
+            updatePlanDisplay();
+            document.getElementById('mealTypesCount').textContent = '0';
+            document.getElementById('deliveryDaysCount').textContent = '0';
+            calculatePrice();
+
+            // Clear all errors
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.textContent = '';
             });
-        });
+        }
 
-        // Format phone number input
-        document.getElementById('phone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.startsWith('0')) {
-                value = '62' + value.substring(1);
-            }
-            if (!value.startsWith('62')) {
-                value = '62' + value;
-            }
-            e.target.value = value;
-        });
+        function showError(elementId, message) {
+            document.getElementById(elementId).textContent = message;
+        }
 
-        // Email validation
-        document.getElementById('email').addEventListener('blur', function() {
-            const email = this.value;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            
-            if (email && !emailRegex.test(email)) {
-                this.classList.add('border-red-500');
-                
-                // Add error message if not exists
-                if (!this.nextElementSibling || !this.nextElementSibling.classList.contains('text-red-500')) {
-                    const errorDiv = document.createElement('div');
-                    errorDiv.className = 'mt-1 text-sm text-red-500';
-                    errorDiv.textContent = 'Format email tidak valid';
-                    this.parentNode.insertBefore(errorDiv, this.nextSibling);
-                }
+        function clearError(elementId) {
+            document.getElementById(elementId).textContent = '';
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
             }
         });
     </script>

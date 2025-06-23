@@ -117,16 +117,16 @@
 </head>
 <body class="bg-gray-50">
     <!-- Navbar -->
-    <nav class="navbar-blur navbar-shadow sticky top-0 z-50 transition-all duration-300">
+    <nav class="navbar-blur navbar-shadow sticky top-0 z-50 transition-all duration-300 bg-white bg-opacity-90">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
-                <div class="flex items-center">
+                <div class="flex-shrink-0 flex items-center">
                     <a href="/" class="flex items-center space-x-3 group">
                         <div class="w-12 h-12 logo-gradient rounded-2xl flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
                             <span class="text-white font-bold text-lg">SC</span>
                         </div>
-                        <div class="flex flex-col">
+                        <div class="hidden sm:flex flex-col">
                             <span class="text-2xl font-bold text-gray-800 group-hover:text-emerald-600 transition-colors">SEA Catering</span>
                             <span class="text-xs text-gray-500 font-medium">Healthy & Fresh</span>
                         </div>
@@ -134,40 +134,39 @@
                 </div>
 
                 <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="/meal-plans" class="text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
-                        Meal Plans
-                    </a>
-                    <a href="{{ route('about') }}" class="text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
-                        About Us
-                    </a>
-                    <a href="{{ route('menu') }}" class="text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
-                        Our Menus
-                    </a>
-                    <a href="/nutrition" class="text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
-                        Nutrition Info
-                    </a>
-                    <a href="/delivery" class="text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
-                        Delivery Areas
-                    </a>
-                    <a href="/corporate" class="text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
-                        Corporate Orders
-                    </a>
+                <div class="hidden md:flex flex-1 justify-center mx-6">
+                    <div class="flex space-x-6 lg:space-x-8">
+                        <a href="/meal-plans" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                            Meal Plans
+                        </a>
+                        <a href="{{ route('about') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                            About Us
+                        </a>
+                        <a href="{{ route('menu') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                            Our Menus
+                        </a>
+                        <a href="/nutrition" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                            Nutrition Info
+                        </a>
+                        <a href="/delivery" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                            Delivery Areas
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Auth Buttons -->
                 <div class="hidden md:flex items-center space-x-4">
-                    <a href="/login" class="text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                    <a href="/login" class="px-3 py-2 text-gray-700 hover:text-emerald-600 font-medium transition-colors">
                         Log in
                     </a>
-                    <a href="/register" class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-full font-medium transition-colors">
+                    <a href="/register" class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-full font-medium transition-colors shadow-sm">
                         Sign Up
                     </a>
                 </div>
 
                 <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-700 hover:text-emerald-600 focus:outline-none">
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-emerald-600 focus:outline-none">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
@@ -178,16 +177,17 @@
 
         <!-- Mobile Navigation -->
         <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
-            <div class="px-4 py-2 space-y-2">
-                <a href="/meal-plans" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">Meal Plans</a>
-                <a href="/about" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">About Us</a>
-                <a href="/menus" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">Our Menus</a>
-                <a href="/nutrition" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">Nutrition Info</a>
-                <a href="/delivery" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">Delivery Areas</a>
-                <a href="/corporate" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">Corporate Orders</a>
-                <hr class="my-2">
-                <a href="/login" class="block py-2 text-gray-700 hover:text-emerald-600 font-medium">Log in</a>
-                <a href="/register" class="block py-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 rounded-full font-medium text-center">Sign Up</a>
+            <div class="px-4 pt-2 pb-4 space-y-1">
+                <a href="/meal-plans" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Meal Plans</a>
+                <a href="/about" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">About Us</a>
+                <a href="/menus" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Our Menus</a>
+                <a href="/nutrition" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Nutrition Info</a>
+                <a href="/delivery" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Delivery Areas</a>
+                <a href="/corporate" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Corporate Orders</a>
+                <div class="pt-2 border-t border-gray-200">
+                    <a href="/login" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Log in</a>
+                    <a href="/register" class="block px-3 py-3 rounded-md text-base font-medium text-center text-white bg-emerald-500 hover:bg-emerald-600">Sign Up</a>
+                </div>
             </div>
         </div>
     </nav>
