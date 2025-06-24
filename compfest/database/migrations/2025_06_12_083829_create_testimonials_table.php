@@ -10,11 +10,14 @@ class CreateTestimonialsTable extends Migration
     {
         Schema::create('testimonials', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_name');
-            $table->string('customer_location')->nullable();
-            $table->integer('rating')->unsigned(); // 1-5
-            $table->text('review_message');
-            $table->boolean('is_approved')->default(false); // For moderation
+            $table->string('name');
+            $table->string('email')->nullable();
+            $table->integer('rating'); // 1-5 stars
+            $table->text('message');
+            $table->string('avatar')->nullable();
+            $table->string('location')->nullable();
+            $table->boolean('is_featured')->default(false);
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
         });
     }

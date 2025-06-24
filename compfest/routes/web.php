@@ -41,3 +41,22 @@ Route::get('/meal-plans', function () {
 Route::get('/delivery-area', function () {
     return view('delivery-area', ['title' => 'FAQ']);
 })->name('delivery-area');
+
+Route::prefix('berlangganan')->group(function () {
+    Route::get('/', [SubscriptionController::class, 'index'])->name('subscription.index');
+    Route::post('/', [SubscriptionController::class, 'store'])->name('subscription.store');
+    Route::get('/{id}', [SubscriptionController::class, 'show'])->name('subscription.show');
+});
+
+// Testimonial Routes
+Route::prefix('testimonial')->group(function () {
+    Route::get('/', [TestimonialController::class, 'index'])->name('testimonial.index');
+    Route::post('/', [TestimonialController::class, 'store'])->name('testimonial.store');
+});
+
+// Admin Routes (optional)
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/subscriptions', [SubscriptionController::class, 'list'])->name('admin.subscriptions');
+    Route::patch('/subscriptions/{id}/status', [SubscriptionController::class, 'updateStatus'])->name('admin.subscription.status');
+    Route::get('/testimonials', [TestimonialController::class, 'adminList'])->name('admin.testimonials');
+});
