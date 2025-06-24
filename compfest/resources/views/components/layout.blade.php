@@ -156,10 +156,10 @@
 
                 <!-- Auth Buttons -->
                 <div class="hidden md:flex items-center space-x-4">
-                    <a href="/login" class="px-3 py-2 text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                    <a href="{{ route('login') }}" class="px-3 py-2 text-gray-700 hover:text-emerald-600 font-medium transition-colors">
                         Log in
                     </a>
-                    <a href="/register" class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-full font-medium transition-colors shadow-sm">
+                    <a href="{{ route('register') }}" class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-full font-medium transition-colors shadow-sm">
                         Sign Up
                     </a>
                 </div>

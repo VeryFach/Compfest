@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -60,3 +66,33 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::patch('/subscriptions/{id}/status', [SubscriptionController::class, 'updateStatus'])->name('admin.subscription.status');
     Route::get('/testimonials', [TestimonialController::class, 'adminList'])->name('admin.testimonials');
 });
+
+Route::get('/dashboard', [AuthController::class, 'dashboard'])
+    ->middleware(['auth'])->name('dashboard');
+
+// Group untuk user biasa
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user/dashboard', [AuthController::class, 'userDashboard'])
+        ->name('user.dashboard');
+    // Route lainnya untuk user
+});
+
+// Group untuk admin
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])
+        ->name('admin.dashboard');
+    // Route lainnya untuk admin
+});
+
+Route::get('/register', [RegisteredUserController::class, 'create'])
+    ->middleware('guest')
+    ->name('register');
+
+Route::post('/register', [RegisteredUserController::class, 'store'])
+    ->middleware('guest');
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])
+    ->middleware('guest')
+    ->name('login');
+
+require __DIR__.'/auth.php';
