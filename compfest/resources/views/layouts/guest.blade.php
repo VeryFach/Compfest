@@ -1,553 +1,321 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="id">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="Daftar akun baru dan nikmati layanan terbaik kami">
-
-    <title>@yield('title', config('app.name', 'Laravel'))</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700,800&family=poppins:300,400,500,600,700&display=swap" rel="stylesheet" />
-
-    <!-- Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'SEA Catering - Healthy Meals Delivered')</title>
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Custom Styles -->
     <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.2);
+        .navbar-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .navbar-blur { backdrop-filter: blur(10px); background: rgba(255,255,255,0.95);}
+        .hover-underline { position: relative; overflow: hidden; }
+        .hover-underline::before { 
+            content: ''; 
+            position: absolute; 
+            width: 0; 
+            height: 2px; 
+            bottom: -2px; 
+            left: 0; 
+            background: linear-gradient(90deg, #10b981, #059669); 
+            transition: width 0.3s ease;
         }
-        
-        * {
-            scroll-behavior: smooth;
+        .hover-underline:hover::before { width: 100%; }
+        .logo-gradient { 
+            background: linear-gradient(135deg, #10b981, #059669, #047857); 
+            box-shadow: 0 4px 15px rgba(16,185,129,0.3);
         }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        .font-display {
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        /* Enhanced Animations */
-        .animate-float {
-            animation: float 8s ease-in-out infinite;
-        }
-        
-        .animate-float-delayed {
-            animation: float 8s ease-in-out infinite;
-            animation-delay: 3s;
-        }
-        
-        .animate-float-slow {
-            animation: float 12s ease-in-out infinite;
-            animation-delay: 1.5s;
-        }
-        
-        .animate-pulse-glow {
-            animation: pulseGlow 4s ease-in-out infinite;
-        }
-        
-        .animate-rotate {
-            animation: rotate 20s linear infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0px) rotate(0deg); 
-            }
-            25% { 
-                transform: translateY(-15px) rotate(2deg); 
-            }
-            50% { 
-                transform: translateY(-30px) rotate(0deg); 
-            }
-            75% { 
-                transform: translateY(-15px) rotate(-2deg); 
-            }
-        }
-        
-        @keyframes pulseGlow {
-            0%, 100% { 
-                opacity: 0.3;
-                transform: scale(1);
-            }
-            50% { 
-                opacity: 0.8;
-                transform: scale(1.1);
-            }
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .animate-slide-up {
-            animation: slideInUp 0.8s ease-out;
-        }
-        
-        /* Advanced Background */
-        .bg-pattern {
-            background: 
-                linear-gradient(135deg, #667eea 0%, #764ba2 100%),
-                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
-            background-attachment: fixed;
-            position: relative;
-        }
-        
-        .bg-pattern::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='7' cy='7' r='3'/%3E%3Ccircle cx='53' cy='7' r='3'/%3E%3Ccircle cx='7' cy='53' r='3'/%3E%3Ccircle cx='53' cy='53' r='3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-        
-        /* Enhanced Glass Morphism */
-        .glass-morphism {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 
-                0 20px 25px -5px rgba(0, 0, 0, 0.1),
-                0 10px 10px -5px rgba(0, 0, 0, 0.04),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 
-                0 25px 45px -10px rgba(0, 0, 0, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-        
-        /* Enhanced Buttons */
-        .btn-primary {
-            background: var(--primary-gradient);
-            box-shadow: 
-                0 10px 20px rgba(102, 126, 234, 0.4),
-                0 6px 6px rgba(102, 126, 234, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                0 15px 30px rgba(102, 126, 234, 0.6),
-                0 10px 10px rgba(102, 126, 234, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-        
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-1px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Logo Enhancement */
-        .logo-container {
-            position: relative;
-        }
-        
-        .logo-glow {
-            position: absolute;
-            inset: -4px;
-            background: var(--primary-gradient);
-            border-radius: 16px;
-            opacity: 0;
-            filter: blur(8px);
-            transition: opacity 0.3s ease;
-        }
-        
-        .logo-container:hover .logo-glow {
-            opacity: 0.6;
-        }
-        
-        /* Navigation Enhancements */
-        .nav-link {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .nav-link:hover::before {
-            left: 100%;
-        }
-        
-        /* Footer Enhancements */
-        .social-icon {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .social-icon::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+        .btn-gradient { 
+            background: linear-gradient(135deg, #10b981, #059669); 
+            box-shadow: 0 4px 15px rgba(16,185,129,0.3); 
             transition: all 0.3s ease;
-            transform: translate(-50%, -50%);
+        }
+        .btn-gradient:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(16,185,129,0.4);
+        }
+        .mobile-menu-slide { 
+            transform: translateY(-100%); 
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu-slide.active { transform: translateY(0); }
+        .footer-gradient { 
+            background: linear-gradient(135deg, #1f2937, #111827, #0f172a);
+        }
+        .footer-card { 
+            background: rgba(255,255,255,0.05); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 16px; 
+            padding: 24px; 
+            transition: all 0.3s ease;
+        }
+        .footer-card:hover { 
+            background: rgba(255,255,255,0.08); 
+            transform: translateY(-2px);
+        }
+        .social-icon { 
+            background: rgba(255,255,255,0.1); 
+            border: 1px solid rgba(255,255,255,0.2); 
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover { 
+            background: linear-gradient(135deg, #10b981, #059669); 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(16,185,129,0.3);
+        }
+        .wave-animation { 
+            background: linear-gradient(45deg, #10b981, #059669, #047857, #10b981); 
+            background-size: 400% 400%; 
+            animation: wave 3s ease-in-out infinite;
+        }
+        @keyframes wave { 
+            0%,100%{background-position:0% 50%;} 
+            50%{background-position:100% 50%;}
+        }
+        .notification-badge { animation: pulse 2s infinite;}
+        @keyframes pulse { 
+            0%,100%{opacity:1;} 
+            50%{opacity:0.7;} 
         }
         
-        .social-icon:hover::before {
-            width: 100px;
-            height: 100px;
+        /* Guest-specific styles */
+        .guest-hero { 
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5, #d1fae5);
+            min-height: 80vh;
         }
-        
-        /* Mobile Optimizations */
-        @media (max-width: 768px) {
-            .bg-pattern {
-                background-attachment: scroll;
-            }
+        .guest-card { 
+            background: rgba(255,255,255,0.9); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255,255,255,0.2); 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
-        
-        /* Utility Classes */
-        .text-gradient {
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .guest-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
-        
-        .text-shadow {
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        .feature-icon { 
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 15px rgba(16,185,129,0.3);
         }
-        
-        .hover-lift {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .cta-button { 
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 15px rgba(16,185,129,0.3);
+            transition: all 0.3s ease;
         }
-        
-        .hover-lift:hover {
-            transform: translateY(-5px);
+        .cta-button:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(16,185,129,0.4);
         }
     </style>
     
     @stack('styles')
 </head>
-<body class="font-sans antialiased bg-pattern min-h-screen">
-    <!-- Enhanced Background Elements -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <!-- Large floating elements -->
-        <div class="absolute top-10 left-10 w-40 h-40 bg-gradient-to-r from-blue-400/30 to-purple-500/30 rounded-full animate-float blur-sm"></div>
-        <div class="absolute top-32 right-20 w-28 h-28 bg-gradient-to-r from-pink-400/30 to-red-500/30 rounded-full animate-float-delayed blur-sm"></div>
-        <div class="absolute bottom-20 left-20 w-36 h-36 bg-gradient-to-r from-green-400/30 to-blue-500/30 rounded-full animate-float-slow blur-sm"></div>
-        <div class="absolute bottom-32 right-10 w-24 h-24 bg-gradient-to-r from-yellow-400/30 to-orange-500/30 rounded-full animate-float-delayed blur-sm"></div>
-        
-        <!-- Additional decorative elements -->
-        <div class="absolute top-1/4 left-1/3 w-2 h-2 bg-white/40 rounded-full animate-pulse-glow"></div>
-        <div class="absolute top-1/2 right-1/4 w-1 h-1 bg-white/50 rounded-full animate-pulse-glow" style="animation-delay: 1s;"></div>
-        <div class="absolute bottom-1/3 left-1/4 w-1.5 h-1.5 bg-white/30 rounded-full animate-pulse-glow" style="animation-delay: 2s;"></div>
-        
-        <!-- Geometric shapes -->
-        <div class="absolute top-20 right-1/3 w-12 h-12 border border-white/20 rounded-lg animate-rotate opacity-40"></div>
-        <div class="absolute bottom-40 left-1/2 w-8 h-8 border border-white/30 rotate-45 animate-float opacity-50"></div>
-    </div>
-
-    <div class="relative min-h-screen flex flex-col animate-slide-up">
-        <!-- Enhanced Header -->
-        <header class="glass-morphism shadow-2xl border-b border-white/30 relative z-10 sticky top-0">
-            <div class="max-w-7xl mx-auto px-4 py-5 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center">
-                    <a href="{{ url('/') }}" class="flex items-center space-x-4 group">
-                        <div class="logo-container">
-                            <div class="logo-glow"></div>
-                            <div class="relative w-12 h-12 bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
-                                <i class="fas fa-utensils text-white text-xl"></i>
-                                <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"></div>
-                            </div>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="navbar-blur navbar-shadow sticky top-0 z-50 transition-all duration-300 bg-white bg-opacity-90">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="{{ route('home') }}" class="flex items-center space-x-3 group">
+                        <div class="w-12 h-12 logo-gradient rounded-2xl flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                            <span class="text-white font-bold text-lg">SC</span>
                         </div>
-                        <div class="flex flex-col">
-                            <span class="text-2xl font-bold font-display text-white text-shadow">
-                                {{ config('app.name', 'MyApp') }}
-                            </span>
-                            <span class="text-xs text-white/70 font-medium">Premium Experience</span>
+                        <div class="hidden sm:flex flex-col">
+                            <span class="text-2xl font-bold text-gray-800 group-hover:text-emerald-600 transition-colors">SEA Catering</span>
+                            <span class="text-xs text-gray-500 font-medium">Healthy & Fresh</span>
                         </div>
                     </a>
-                    
-                    <nav class="hidden md:flex space-x-2">
-                        @if (Route::has('login'))
-                            <a href="{{ route('login') }}" 
-                               class="nav-link btn-secondary flex items-center px-6 py-3 rounded-2xl text-sm font-semibold text-white hover:text-white transition-all duration-300 group">
-                                <i class="fas fa-sign-in-alt mr-2 group-hover:scale-110 transition-transform duration-200"></i>
-                                Login
-                            </a>
-                        @endif
-                        
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" 
-                               class="btn-primary flex items-center px-6 py-3 rounded-2xl text-sm font-semibold text-white transition-all duration-300 group">
-                                <i class="fas fa-user-plus mr-2 group-hover:scale-110 transition-transform duration-200"></i>
-                                Register Now
-                            </a>
-                        @endif
-                    </nav>
-                    
-                    <!-- Enhanced Mobile menu button -->
-                    <div class="md:hidden">
-                        <button type="button" class="btn-secondary p-3 rounded-2xl text-white transition-all duration-300" onclick="toggleMobileMenu()">
-                            <i class="fas fa-bars text-lg"></i>
-                        </button>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex flex-1 justify-center mx-6">
+                    <div class="flex space-x-6 lg:space-x-8">
+                        <a href="{{ route('meal-plans') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">Meal Plans</a>
+                        <a href="{{ route('about') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">About Us</a>
+                        <a href="{{ route('menu') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">Our Menus</a>
+                        <a href="{{ route('nutrition') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">Nutrition Info</a>
+                        <a href="{{ route('delivery-area') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">Delivery Areas</a>
                     </div>
                 </div>
                 
-                <!-- Enhanced Mobile Navigation -->
-                <div id="mobileMenu" class="hidden md:hidden mt-6 pb-4 border-t border-white/20 pt-6">
-                    <div class="flex flex-col space-y-3">
-                        @if (Route::has('login'))
-                            <a href="{{ route('login') }}" 
-                               class="btn-secondary flex items-center px-6 py-4 rounded-2xl text-sm font-semibold text-white transition-all duration-300">
-                                <i class="fas fa-sign-in-alt mr-3"></i>
-                                Login
-                            </a>
-                        @endif
-                        
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" 
-                               class="btn-primary flex items-center px-6 py-4 rounded-2xl text-sm font-semibold text-white transition-all duration-300">
-                                <i class="fas fa-user-plus mr-3"></i>
-                                Register Now
-                            </a>
-                        @endif
-                    </div>
+                <!-- Auth Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="{{ route('login') }}" class="px-4 py-2 text-gray-700 hover:text-emerald-600 font-medium transition-colors border border-gray-300 rounded-full hover:border-emerald-500">Log in</a>
+                    <a href="{{ route('register') }}" class="cta-button text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-sm">Sign Up</a>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-emerald-600 focus:outline-none">
+                        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
-        </header>
-
-        <!-- Main Content -->
-        <main class="flex-grow relative z-10">
-            @yield('content')
-        </main>
-
-        <!-- Enhanced Footer -->
-        <footer class="glass-card border-t border-white/30 py-12 relative z-10 mt-20">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-                    <!-- Enhanced Company Info -->
-                    <div class="md:col-span-2 text-center md:text-left">
-                        <div class="flex items-center justify-center md:justify-start space-x-4 mb-6">
-                            <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg">
-                                <i class="fas fa-utensils text-white text-lg"></i>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden mobile-menu-slide">
+            <div class="px-4 pt-2 pb-4 space-y-1 bg-white shadow-lg">
+                <a href="{{ route('meal-plans') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Meal Plans</a>
+                <a href="{{ route('about') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">About Us</a>
+                <a href="{{ route('menu') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Our Menus</a>
+                <a href="{{ route('nutrition') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Nutrition Info</a>
+                <a href="{{ route('delivery-area') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Delivery Areas</a>
+                <div class="pt-4 border-t border-gray-200 space-y-2">
+                    <a href="{{ route('login') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50 border border-gray-300">Log in</a>
+                    <a href="{{ route('register') }}" class="block px-3 py-3 rounded-md text-base font-medium text-center text-white bg-emerald-500 hover:bg-emerald-600">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="min-h-screen">
+        @yield('content')
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer-gradient text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="wave-animation h-full w-full"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Company Info -->
+                <div class="lg:col-span-2">
+                    <div class="footer-card">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="w-12 h-12 logo-gradient rounded-2xl flex items-center justify-center">
+                                <span class="text-white font-bold text-lg">SC</span>
                             </div>
                             <div>
-                                <span class="font-bold text-xl text-white font-display">{{ config('app.name', 'MyApp') }}</span>
-                                <p class="text-sm text-white/70">Premium Experience</p>
+                                <span class="text-2xl font-bold">SEA Catering</span>
+                                <p class="text-sm text-gray-300">Healthy & Fresh</p>
                             </div>
                         </div>
-                        <p class="text-white/80 text-lg leading-relaxed max-w-md mx-auto md:mx-0">
-                            Platform terpercaya untuk pengalaman digital terbaik Anda. Bergabunglah dengan ribuan pengguna yang telah merasakan keunggulan layanan kami.
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Menyediakan makanan sehat yang dapat disesuaikan dan dikirim ke seluruh Indonesia. 
+                            Membuat makan sehat menjadi mudah diakses dan nyaman untuk semua orang.
                         </p>
-                        <div class="flex justify-center md:justify-start space-x-4 mt-6">
-                            <div class="flex items-center space-x-2 text-white/70">
-                                <i class="fas fa-users text-indigo-400"></i>
-                                <span class="text-sm">10K+ Users</span>
-                            </div>
-                            <div class="flex items-center space-x-2 text-white/70">
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <span class="text-sm">4.9 Rating</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Quick Links -->
-                    <div class="text-center md:text-left">
-                        <h3 class="font-bold text-white mb-6 text-lg font-display">Tautan Cepat</h3>
-                        <div class="space-y-3">
-                            <a href="#" class="block text-white/70 hover:text-white transition-colors duration-300 hover:translate-x-2 transform">
-                                <i class="fas fa-chevron-right text-xs mr-2 text-indigo-400"></i>Tentang Kami
+                        <!-- Social Media -->
+                        <div class="flex space-x-4">
+                            <a href="#" class="social-icon w-12 h-12 rounded-xl flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                                </svg>
                             </a>
-                            <a href="#" class="block text-white/70 hover:text-white transition-colors duration-300 hover:translate-x-2 transform">
-                                <i class="fas fa-chevron-right text-xs mr-2 text-indigo-400"></i>Layanan
+                            <a href="#" class="social-icon w-12 h-12 rounded-xl flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.083.347-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.017 0z"/>
+                                </svg>
                             </a>
-                            <a href="#" class="block text-white/70 hover:text-white transition-colors duration-300 hover:translate-x-2 transform">
-                                <i class="fas fa-chevron-right text-xs mr-2 text-indigo-400"></i>Kontak
+                            <a href="#" class="social-icon w-12 h-12 rounded-xl flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                </svg>
                             </a>
-                            <a href="#" class="block text-white/70 hover:text-white transition-colors duration-300 hover:translate-x-2 transform">
-                                <i class="fas fa-chevron-right text-xs mr-2 text-indigo-400"></i>Blog
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Legal & Support -->
-                    <div class="text-center md:text-left">
-                        <h3 class="font-bold text-white mb-6 text-lg font-display">Dukungan</h3>
-                        <div class="space-y-3">
-                            <a href="#" class="block text-white/70 hover:text-white transition-colors duration-300 hover:translate-x-2 transform">
-                                <i class="fas fa-file-contract text-xs mr-2 text-indigo-400"></i>Syarat & Ketentuan
-                            </a>
-                            <a href="#" class="block text-white/70 hover:text-white transition-colors duration-300 hover:translate-x-2 transform">
-                                <i class="fas fa-shield-alt text-xs mr-2 text-indigo-400"></i>Kebijakan Privasi
-                            </a>
-                            <a href="#" class="block text-white/70 hover:text-white transition-colors duration-300 hover:translate-x-2 transform">
-                                <i class="fas fa-question-circle text-xs mr-2 text-indigo-400"></i>FAQ
-                            </a>
-                            <a href="#" class="block text-white/70 hover:text-white transition-colors duration-300 hover:translate-x-2 transform">
-                                <i class="fas fa-headset text-xs mr-2 text-indigo-400"></i>Support 24/7
+                            <a href="#" class="social-icon w-12 h-12 rounded-xl flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
                             </a>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Enhanced Bottom Footer -->
-                <div class="pt-8 border-t border-white/20">
-                    <div class="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
-                        <div class="text-center lg:text-left">
-                            <p class="text-white/70 mb-2">
-                                &copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}. Semua hak dilindungi undang-undang.
-                            </p>
-                            <p class="text-white/50 text-sm">
-                                Dibuat dengan <i class="fas fa-heart text-red-400 mx-1"></i> untuk pengalaman terbaik Anda
-                            </p>
+                <!-- Quick Links -->
+                <div class="footer-card">
+                    <h3 class="text-lg font-semibold mb-6 text-emerald-400">Link Cepat</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{{ route('meal-plans') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Meal Plans</span></a></li>
+                        <li><a href="{{ route('menu') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Menu</span></a></li>
+                        <li><a href="{{ route('nutrition') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Panduan Nutrisi</span></a></li>
+                        <li><a href="{{ route('delivery-area') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Area Pengiriman</span></a></li>
+                    </ul>
+                </div>
+                
+                <!-- Support -->
+                <div class="footer-card">
+                    <h3 class="text-lg font-semibold mb-6 text-emerald-400">Dukungan</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Pusat Bantuan</span></a></li>
+                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Hubungi Kami</span></a></li>
+                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>FAQ</span></a></li>
+                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Kebijakan Privasi</span></a></li>
+                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Syarat Layanan</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Section -->
+            <div class="border-t border-gray-600 pt-8">
+                <div class="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
+                    <div class="text-center lg:text-left">
+                        <p class="text-gray-400 text-sm">© 2024 SEA Catering. Semua hak dilindungi undang-undang.</p>
+                        <p class="text-gray-500 text-xs mt-1">Dibuat dengan ❤️ untuk Indonesia</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-center">
+                        <div class="flex items-center justify-center space-x-2 text-gray-400 text-sm">
+                            <span>🇮🇩</span>
+                            <span>Indonesia</span>
                         </div>
-                        
-                        <!-- Enhanced Social Media -->
-                        <div class="flex items-center space-x-4">
-                            <span class="text-white/70 text-sm font-medium mr-2">Ikuti Kami:</span>
-                            <a href="#" class="social-icon w-12 h-12 glass-morphism rounded-2xl flex items-center justify-center text-white/70 hover:text-white transition-all duration-300 hover-lift group">
-                                <i class="fab fa-facebook-f group-hover:scale-110 transition-transform duration-200"></i>
-                            </a>
-                            <a href="#" class="social-icon w-12 h-12 glass-morphism rounded-2xl flex items-center justify-center text-white/70 hover:text-white transition-all duration-300 hover-lift group">
-                                <i class="fab fa-twitter group-hover:scale-110 transition-transform duration-200"></i>
-                            </a>
-                            <a href="#" class="social-icon w-12 h-12 glass-morphism rounded-2xl flex items-center justify-center text-white/70 hover:text-white transition-all duration-300 hover-lift group">
-                                <i class="fab fa-instagram group-hover:scale-110 transition-transform duration-200"></i>
-                            </a>
-                            <a href="#" class="social-icon w-12 h-12 glass-morphism rounded-2xl flex items-center justify-center text-white/70 hover:text-white transition-all duration-300 hover-lift group">
-                                <i class="fab fa-linkedin-in group-hover:scale-110 transition-transform duration-200"></i>
-                            </a>
-                            <a href="#" class="social-icon w-12 h-12 glass-morphism rounded-2xl flex items-center justify-center text-white/70 hover:text-white transition-all duration-300 hover-lift group">
-                                <i class="fab fa-youtube group-hover:scale-110 transition-transform duration-200"></i>
-                            </a>
+                        <div class="flex items-center justify-center space-x-2 text-gray-400 text-sm">
+                            <span>+62-8135-9501-733</span>
+                        </div>
+                        <div class="flex items-center justify-center space-x-2 text-gray-400 text-sm">
+                            <span>hello@seacatering.id</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </footer>
-    </div>
-
-    <!-- Enhanced Scripts -->
+        </div>
+    </footer>
+    
+    <!-- Mobile Menu Script -->
     <script>
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.toggle('hidden');
-        }
-        
-        // Enhanced mobile menu handling
-        document.addEventListener('click', function(event) {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuButton = event.target.closest('button');
-            
-            if (!menuButton && !mobileMenu.contains(event.target)) {
-                mobileMenu.classList.add('hidden');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-shadow');
+            } else {
+                navbar.classList.remove('navbar-shadow');
             }
         });
-        
-        // Smooth scroll with offset for fixed header
+
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const headerOffset = 100;
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
-            });
-        });
-        
-        // Add loading animation
-        window.addEventListener('load', function() {
-            document.body.classList.add('loaded');
-        });
-        
-        // Enhanced scroll effects
-        let lastScrollTop = 0;
-        const header = document.querySelector('header');
-        
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scrolling down
-                header.style.transform = 'translateY(-100%)';
-            } else {
-                // Scrolling up
-                header.style.transform = 'translateY(0)';
-            }
-            
-            lastScrollTop = scrollTop;
-        }, false);
-        
-        // Add parallax effect to background elements
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelectorAll('.animate-float, .animate-float-delayed, .animate-float-slow');
-            const speed = 0.5;
-            
-            parallax.forEach(element => {
-                const yPos = -(scrolled * speed);
-                element.style.transform = `translateY(${yPos}px)`;
             });
         });
     </script>
