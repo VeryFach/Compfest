@@ -7,6 +7,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::get('/', function () {
     return view('home', ['title' => 'Beranda']);
@@ -84,15 +85,29 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     // Route lainnya untuk admin
 });
 
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+    ->middleware('guest')
+    ->name('login');
+
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
 Route::get('/register', [RegisteredUserController::class, 'create'])
     ->middleware('guest')
     ->name('register');
 
-Route::post('/register', [RegisteredUserController::class, 'store'])
-    ->middleware('guest');
+Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])
-    ->middleware('guest')
-    ->name('login');
+// Dashboard route
+Route::get('/dashboard', [AuthController::class, 'dashboard'])
+    ->middleware('auth')
+    ->name('dashboard');
+
+Route::get('/profile', [ProfileController::class, 'edit'])
+    ->middleware('auth')
+    ->name('profile.edit');
 
 require __DIR__.'/auth.php';
+
+Route :: get('/guest', function () {
+    return view('guest', ['title' => 'Guest Page']);
+})->name('guest');
