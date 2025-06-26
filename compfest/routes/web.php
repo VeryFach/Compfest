@@ -111,3 +111,8 @@ require __DIR__.'/auth.php';
 Route :: get('/guest', function () {
     return view('guest', ['title' => 'Guest Page']);
 })->name('guest');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile');
+});

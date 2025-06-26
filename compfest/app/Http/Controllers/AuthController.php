@@ -16,10 +16,10 @@ class AuthController extends Controller
     public function dashboard()
     {
         if (Auth::user()->isAdmin()) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('auth.admin.dashboard');
         }
         
-        return redirect()->route('user.dashboard');
+        return redirect()->route('auth.user.dashboard');
     }
 
     public function adminDashboard()
