@@ -49,10 +49,27 @@ Route::get('/delivery-area', function () {
     return view('delivery-area', ['title' => 'FAQ']);
 })->name('delivery-area');
 
-Route::prefix('berlangganan')->group(function () {
-    Route::get('/', [SubscriptionController::class, 'index'])->name('subscription.index');
-    Route::post('/', [SubscriptionController::class, 'store'])->name('subscription.store');
-    Route::get('/{id}', [SubscriptionController::class, 'show'])->name('subscription.show');
+// Subscription routes
+Route::prefix('subscriptions')->group(function () {
+    // Show subscription form
+    Route::get('/berlangganan', [SubscriptionController::class, 'index'])->name('subscriptions.index');
+    
+    // Handle form submission
+    Route::post('/', [SubscriptionController::class, 'store'])->name('subscriptions.store');
+    
+    // Calculate price (AJAX)
+    Route::post('/calculate-price', [SubscriptionController::class, 'calculatePrice'])->name('subscriptions.calculate');
+    
+    // View subscription details
+    Route::get('/{id}', [SubscriptionController::class, 'show'])->name('subscriptions.show');
+});
+
+// Admin routes (with auth middleware)
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    // Admin subscription management
+    Route::get('/subscriptions', [SubscriptionController::class, 'list'])->name('admin.subscriptions');
+    Route::get('/subscriptions/statistics', [SubscriptionController::class, 'statistics'])->name('admin.subscriptions.stats');
+    Route::patch('/subscriptions/{id}/status', [SubscriptionController::class, 'updateStatus'])->name('admin.subscriptions.status');
 });
 
 // Testimonial Routes

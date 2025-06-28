@@ -1,4 +1,66 @@
 <x-layout title="Berlangganan">
+    @php
+        $plans = [
+            'basic' => [
+                'name' => 'Paket Basic',
+                'price' => 25000,
+                'icon' => '🍚',
+                'color' => 'blue',
+                'features' => [
+                    'Nasi putih',
+                    'Lauk utama',
+                    'Sayur',
+                    'Buah/sambal'
+                ]
+            ],
+            'premium' => [
+                'name' => 'Paket Premium',
+                'price' => 35000,
+                'icon' => '🍛',
+                'color' => 'purple',
+                'features' => [
+                    'Nasi putih/merah',
+                    'Lauk utama',
+                    'Lauk pendamping',
+                    'Sayur',
+                    'Buah',
+                    'Kerupuk'
+                ]
+            ],
+            'executive' => [
+                'name' => 'Paket Executive',
+                'price' => 45000,
+                'icon' => '🍱',
+                'color' => 'green',
+                'features' => [
+                    'Nasi putih/merah',
+                    'Lauk utama premium',
+                    'Lauk pendamping',
+                    'Sayur',
+                    'Buah',
+                    'Kerupuk',
+                    'Es teh/jus'
+                ]
+            ]
+        ];
+
+        $mealTypes = [
+            'breakfast' => ['name' => 'Sarapan', 'icon' => '☕'],
+            'lunch' => ['name' => 'Makan Siang', 'icon' => '🍲'],
+            'dinner' => ['name' => 'Makan Malam', 'icon' => '🍛']
+        ];
+
+        $deliveryDays = [
+            'monday' => 'Senin',
+            'tuesday' => 'Selasa',
+            'wednesday' => 'Rabu',
+            'thursday' => 'Kamis',
+            'friday' => 'Jumat',
+            'saturday' => 'Sabtu',
+            'sunday' => 'Minggu'
+        ];
+    @endphp
+    
     <!DOCTYPE html>
     <html lang="id">
     <head>
@@ -163,7 +225,8 @@
                             <p class="text-blue-100">Isi form di bawah untuk memulai berlangganan</p>
                         </div>
                         
-                        <form id="subscriptionForm" class="p-8 space-y-8">
+                        <form id="subscriptionForm" class="p-8 space-y-8" action="{{ route('subscriptions.store') }}" method="POST">
+                            @csrf
                             <!-- Personal Information -->
                             <div class="space-y-6">
                                 <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Informasi Pribadi</h3>
@@ -180,6 +243,7 @@
                                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                                             required
                                             placeholder="Masukkan nama lengkap Anda"
+                                            value="{{ old('full_name') }}"
                                         >
                                         <div class="error-message" id="fullNameError"></div>
                                     </div>
@@ -196,6 +260,7 @@
                                             required
                                             placeholder="08123456789"
                                             pattern="[0-9]{10,13}"
+                                            value="{{ old('phone') }}"
                                         >
                                         <div class="error-message" id="phoneError"></div>
                                     </div>
@@ -211,6 +276,7 @@
                                         name="email"
                                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                                         placeholder="contoh@email.com"
+                                        value="{{ old('email') }}"
                                     >
                                     <div class="error-message" id="emailError"></div>
                                 </div>
@@ -226,7 +292,7 @@
                                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                                         required
                                         placeholder="Masukkan alamat lengkap untuk pengiriman"
-                                    ></textarea>
+                                    >{{ old('address') }}</textarea>
                                     <div class="error-message" id="addressError"></div>
                                 </div>
 
@@ -240,7 +306,7 @@
                                         rows="3"
                                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                                         placeholder="Contoh: Alergi kacang, tidak bisa pedas, vegetarian, dll."
-                                    ></textarea>
+                                    >{{ old('allergies') }}</textarea>
                                 </div>
                             </div>
 
@@ -249,54 +315,27 @@
                                 <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Pilih Paket <span class="text-red-500">*</span></h3>
                                 
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div class="plan-card bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 cursor-pointer" data-plan="diet" data-price="30000">
+                                    @foreach($plans as $planKey => $plan)
+                                    <div class="plan-card bg-gradient-to-br from-{{ $plan['color'] }}-50 to-{{ $plan['color'] }}-100 rounded-xl p-6 cursor-pointer" 
+                                         data-plan="{{ $planKey }}" 
+                                         data-price="{{ $plan['price'] }}">
                                         <div class="text-center">
-                                            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                                <span class="text-2xl text-white">🥗</span>
+                                            <div class="w-16 h-16 bg-{{ $plan['color'] }}-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                                <span class="text-2xl text-white">{{ $plan['icon'] }}</span>
                                             </div>
-                                            <h4 class="text-xl font-bold text-gray-800 mb-2">Diet Plan</h4>
-                                            <div class="text-2xl font-bold text-green-600 mb-2">Rp 30.000</div>
+                                            <h4 class="text-xl font-bold text-gray-800 mb-2">{{ $plan['name'] }}</h4>
+                                            <div class="text-2xl font-bold text-{{ $plan['color'] }}-600 mb-2">Rp {{ number_format($plan['price'], 0, ',', '.') }}</div>
                                             <p class="text-sm text-gray-600 mb-4">per makanan</p>
                                             <ul class="text-sm text-gray-600 space-y-1">
-                                                <li>• Rendah kalori</li>
-                                                <li>• Sayuran segar</li>
-                                                <li>• Protein lean</li>
+                                                @foreach($plan['features'] as $feature)
+                                                <li>• {{ $feature }}</li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </div>
-
-                                    <div class="plan-card bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 cursor-pointer" data-plan="protein" data-price="40000">
-                                        <div class="text-center">
-                                            <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                                <span class="text-2xl text-white">🍖</span>
-                                            </div>
-                                            <h4 class="text-xl font-bold text-gray-800 mb-2">Protein Plan</h4>
-                                            <div class="text-2xl font-bold text-blue-600 mb-2">Rp 40.000</div>
-                                            <p class="text-sm text-gray-600 mb-4">per makanan</p>
-                                            <ul class="text-sm text-gray-600 space-y-1">
-                                                <li>• High protein</li>
-                                                <li>• Daging berkualitas</li>
-                                                <li>• Fitness friendly</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="plan-card bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 cursor-pointer" data-plan="royal" data-price="60000">
-                                        <div class="text-center">
-                                            <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                                <span class="text-2xl text-white">👑</span>
-                                            </div>
-                                            <h4 class="text-xl font-bold text-gray-800 mb-2">Royal Plan</h4>
-                                            <div class="text-2xl font-bold text-purple-600 mb-2">Rp 60.000</div>
-                                            <p class="text-sm text-gray-600 mb-4">per makanan</p>
-                                            <ul class="text-sm text-gray-600 space-y-1">
-                                                <li>• Premium ingredients</li>
-                                                <li>• Gourmet style</li>
-                                                <li>• Luxury experience</li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
+                                <input type="hidden" id="selectedPlan" name="plan" value="{{ old('plan') }}">
                                 <div class="error-message" id="planError"></div>
                             </div>
 
@@ -306,29 +345,19 @@
                                 <p class="text-gray-600">Pilih minimal satu jenis makanan</p>
                                 
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    @foreach($mealTypes as $mealKey => $mealType)
                                     <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <input type="checkbox" class="checkbox-custom mr-3" name="mealType" value="breakfast">
+                                        <input type="checkbox" 
+                                               class="checkbox-custom mr-3" 
+                                               name="meal_types[]" 
+                                               value="{{ $mealKey }}"
+                                               @if(in_array($mealKey, old('meal_types', []))) checked @endif>
                                         <div class="flex items-center">
-                                            <span class="text-2xl mr-3">🌅</span>
-                                            <span class="font-medium">Sarapan</span>
+                                            <span class="text-2xl mr-3">{{ $mealType['icon'] }}</span>
+                                            <span class="font-medium">{{ $mealType['name'] }}</span>
                                         </div>
                                     </label>
-                                    
-                                    <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <input type="checkbox" class="checkbox-custom mr-3" name="mealType" value="lunch">
-                                        <div class="flex items-center">
-                                            <span class="text-2xl mr-3">☀️</span>
-                                            <span class="font-medium">Makan Siang</span>
-                                        </div>
-                                    </label>
-                                    
-                                    <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <input type="checkbox" class="checkbox-custom mr-3" name="mealType" value="dinner">
-                                        <div class="flex items-center">
-                                            <span class="text-2xl mr-3">🌙</span>
-                                            <span class="font-medium">Makan Malam</span>
-                                        </div>
-                                    </label>
+                                    @endforeach
                                 </div>
                                 <div class="error-message" id="mealTypeError"></div>
                             </div>
@@ -339,40 +368,16 @@
                                 <p class="text-gray-600">Pilih hari-hari untuk pengiriman makanan</p>
                                 
                                 <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+                                    @foreach($deliveryDays as $dayKey => $dayName)
                                     <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="monday">
-                                        <span class="text-sm font-medium">Senin</span>
+                                        <input type="checkbox" 
+                                               class="checkbox-custom mb-2" 
+                                               name="delivery_days[]" 
+                                               value="{{ $dayKey }}"
+                                               @if(in_array($dayKey, old('delivery_days', []))) checked @endif>
+                                        <span class="text-sm font-medium">{{ $dayName }}</span>
                                     </label>
-                                    
-                                    <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="tuesday">
-                                        <span class="text-sm font-medium">Selasa</span>
-                                    </label>
-                                    
-                                    <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="wednesday">
-                                        <span class="text-sm font-medium">Rabu</span>
-                                    </label>
-                                    
-                                    <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="thursday">
-                                        <span class="text-sm font-medium">Kamis</span>
-                                    </label>
-                                    
-                                    <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="friday">
-                                        <span class="text-sm font-medium">Jumat</span>
-                                    </label>
-                                    
-                                    <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="saturday">
-                                        <span class="text-sm font-medium">Sabtu</span>
-                                    </label>
-                                    
-                                    <label class="flex flex-col items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <input type="checkbox" class="checkbox-custom mb-2" name="deliveryDay" value="sunday">
-                                        <span class="text-sm font-medium">Minggu</span>
-                                    </label>
+                                    @endforeach
                                 </div>
                                 <div class="error-message" id="deliveryDayError"></div>
                             </div>
@@ -392,12 +397,12 @@
                                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                                         >
                                             <option value="">Pilih waktu pengiriman</option>
-                                            <option value="07:00-09:00">07:00 - 09:00</option>
-                                            <option value="09:00-11:00">09:00 - 11:00</option>
-                                            <option value="11:00-13:00">11:00 - 13:00</option>
-                                            <option value="13:00-15:00">13:00 - 15:00</option>
-                                            <option value="15:00-17:00">15:00 - 17:00</option>
-                                            <option value="17:00-19:00">17:00 - 19:00</option>
+                                            <option value="07:00-09:00" @if(old('delivery_time') == '07:00-09:00')) selected @endif>07:00 - 09:00</option>
+                                            <option value="09:00-11:00" @if(old('delivery_time') == '09:00-11:00')) selected @endif>09:00 - 11:00</option>
+                                            <option value="11:00-13:00" @if(old('delivery_time') == '11:00-13:00')) selected @endif>11:00 - 13:00</option>
+                                            <option value="13:00-15:00" @if(old('delivery_time') == '13:00-15:00')) selected @endif>13:00 - 15:00</option>
+                                            <option value="15:00-17:00" @if(old('delivery_time') == '15:00-17:00')) selected @endif>15:00 - 17:00</option>
+                                            <option value="17:00-19:00" @if(old('delivery_time') == '17:00-19:00')) selected @endif>17:00 - 19:00</option>
                                         </select>
                                     </div>
                                     
@@ -410,6 +415,8 @@
                                             id="startDate" 
                                             name="start_date"
                                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                            value="{{ old('start_date') }}"
+                                            min="{{ date('Y-m-d') }}"
                                         >
                                     </div>
                                 </div>
@@ -487,7 +494,8 @@
         <script>
             // API Configuration
             const API_CONFIG = {
-                BASE_URL: '/api/subscriptions',
+                BASE_URL: '{{ route('subscriptions.store') }}',
+                CALCULATE_URL: '{{ route('subscriptions.calculate') }}',
                 CSRF_TOKEN: document.querySelector('meta[name="csrf-token"]')?.content || '',
                 HEADERS: {
                     'Content-Type': 'application/json',
@@ -497,11 +505,7 @@
             };
 
             // Subscription Plans Data
-            const PLANS = {
-                diet: { name: 'Diet Plan', price: 30000 },
-                protein: { name: 'Protein Plan', price: 40000 },
-                royal: { name: 'Royal Plan', price: 60000 }
-            };
+            const PLANS = @json($plans);
 
             // Application State
             const AppState = {
@@ -519,17 +523,18 @@
 
                 updatePlan(plan) {
                     this.selectedPlan = plan;
+                    document.getElementById('selectedPlan').value = plan;
                 },
 
                 updateMealTypes() {
                     this.selectedMealTypes = Array.from(
-                        document.querySelectorAll('input[name="mealType"]:checked')
+                        document.querySelectorAll('input[name="meal_types[]"]:checked')
                     ).map(cb => cb.value);
                 },
 
                 updateDeliveryDays() {
                     this.selectedDeliveryDays = Array.from(
-                        document.querySelectorAll('input[name="deliveryDay"]:checked')
+                        document.querySelectorAll('input[name="delivery_days[]"]:checked')
                     ).map(cb => cb.value);
                 },
 
@@ -545,8 +550,8 @@
                 successModal: document.getElementById('successModal'),
                 subscriptionForm: document.getElementById('subscriptionForm'),
                 planCards: document.querySelectorAll('.plan-card'),
-                mealTypeCheckboxes: document.querySelectorAll('input[name="mealType"]'),
-                deliveryDayCheckboxes: document.querySelectorAll('input[name="deliveryDay"]'),
+                mealTypeCheckboxes: document.querySelectorAll('input[name="meal_types[]"]'),
+                deliveryDayCheckboxes: document.querySelectorAll('input[name="delivery_days[]"]'),
                 startDateInput: document.getElementById('startDate'),
                 priceDisplayElements: {
                     selectedPlan: document.getElementById('selectedPlanDisplay'),
@@ -631,25 +636,43 @@
                     Utils.hideElement(DOM.successModal);
                 },
 
-                updatePriceDisplay() {
-                    const price = AppState.getSelectedPlanPrice();
-                    const mealTypesCount = AppState.selectedMealTypes.length;
-                    const deliveryDaysCount = AppState.selectedDeliveryDays.length;
-                    const weeksPerMonth = 4.3;
-                    
-                    // Update display elements
-                    DOM.priceDisplayElements.selectedPlan.textContent = 
-                        AppState.selectedPlan ? PLANS[AppState.selectedPlan].name : '-';
-                    
-                    DOM.priceDisplayElements.mealTypesCount.textContent = mealTypesCount;
-                    DOM.priceDisplayElements.deliveryDaysCount.textContent = deliveryDaysCount;
-                    
-                    // Calculate and display total price
-                    if (price > 0 && mealTypesCount > 0 && deliveryDaysCount > 0) {
-                        const totalPrice = price * mealTypesCount * deliveryDaysCount * weeksPerMonth;
-                        DOM.priceDisplayElements.totalPrice.textContent = Utils.formatCurrency(totalPrice);
-                    } else {
+                async updatePriceDisplay() {
+                    if (!AppState.selectedPlan || 
+                        AppState.selectedMealTypes.length === 0 || 
+                        AppState.selectedDeliveryDays.length === 0) {
                         DOM.priceDisplayElements.totalPrice.textContent = Utils.formatCurrency(0);
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(API_CONFIG.CALCULATE_URL, {
+                            method: 'POST',
+                            headers: API_CONFIG.HEADERS,
+                            body: JSON.stringify({
+                                plan: AppState.selectedPlan,
+                                meal_types: AppState.selectedMealTypes,
+                                delivery_days: AppState.selectedDeliveryDays
+                            })
+                        });
+
+                        const data = await response.json();
+
+                        if (data.success) {
+                            // Update display elements
+                            DOM.priceDisplayElements.selectedPlan.textContent = 
+                                AppState.selectedPlan ? PLANS[AppState.selectedPlan].name : '-';
+                            
+                            DOM.priceDisplayElements.mealTypesCount.textContent = 
+                                AppState.selectedMealTypes.length;
+                            
+                            DOM.priceDisplayElements.deliveryDaysCount.textContent = 
+                                AppState.selectedDeliveryDays.length;
+                            
+                            DOM.priceDisplayElements.totalPrice.textContent = 
+                                data.data.formatted_total_price;
+                        }
+                    } catch (error) {
+                        console.error('Price calculation error:', error);
                     }
                 },
 
@@ -743,7 +766,7 @@
                         return await response.json();
                     } catch (error) {
                         console.error('API Error:', error);
-                        throw error; // Re-throw error untuk ditangkap oleh caller
+                        throw error;
                     }
                 }
             };
@@ -801,7 +824,7 @@
                     const response = await ApiService.postSubscription(formData);
                     
                     if (!response.success) {
-                        throw new Error(response.error || 'Unknown error');
+                        throw new Error(response.message || 'Unknown error');
                     }
                     
                     UI.showSuccessModal();
@@ -810,6 +833,13 @@
                 } catch (error) {
                     console.error('Submission error:', error);
                     UI.showAlert(error.message || 'Terjadi kesalahan saat mengirim data. Silakan coba lagi.', 'error');
+                    
+                    // Show server-side validation errors
+                    if (error.errors) {
+                        for (const [field, messages] of Object.entries(error.errors)) {
+                            UI.showError(field, messages[0]);
+                        }
+                    }
                 } finally {
                     AppState.isSubmitting = false;
                     UI.hideLoading();
@@ -819,8 +849,20 @@
             // Initialize Application
             function init() {
                 // Set minimum date for start date (today)
-                const today = new Date().toISOString().split('T')[0];
-                DOM.startDateInput.min = today;
+                DOM.startDateInput.min = new Date().toISOString().split('T')[0];
+                
+                // Initialize from old input (if form was submitted with errors)
+                @if(old('plan'))
+                    const planCard = document.querySelector(`.plan-card[data-plan="{{ old('plan') }}"]`);
+                    if (planCard) {
+                        planCard.classList.add('selected');
+                        AppState.updatePlan('{{ old('plan') }}');
+                    }
+                @endif
+                
+                AppState.updateMealTypes();
+                AppState.updateDeliveryDays();
+                UI.updatePriceDisplay();
                 
                 // Add event listeners
                 DOM.planCards.forEach(card => {
