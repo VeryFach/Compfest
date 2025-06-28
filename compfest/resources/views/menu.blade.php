@@ -1,4 +1,3 @@
-<!-- resources/views/menu.blade.php -->
 <x-layout title="Menu & Paket - ">
     <!DOCTYPE html>
     <html lang="id">
@@ -300,7 +299,7 @@
                     <div class="menu-item animate-fade-in group" data-category="ekonomis">
                         <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
                             <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=250&fit=crop" class="w-full h-64 object-cover" alt="Paket Anak">
+                                <img src="https://images.unsplash.com/photo-1569420067112-b57b4f024595?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-64 object-cover" alt="Paket Anak">
                                 <div class="absolute top-4 left-4">
                                     <span class="bg-pink-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
                                         <i class="fas fa-child mr-2"></i>Anak

@@ -3,83 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'SEA Catering - Healthy Meals Delivered')</title>
+    <title>{{ $title ?? 'SEA Catering - Healthy Meals Delivered' }}</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Custom Styles -->
     <style>
-        .navbar-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        .navbar-blur { backdrop-filter: blur(10px); background: rgba(255,255,255,0.95);}
-        .hover-underline { position: relative; overflow: hidden; }
-        .hover-underline::before { 
-            content: ''; 
-            position: absolute; 
-            width: 0; 
-            height: 2px; 
-            bottom: -2px; 
-            left: 0; 
-            background: linear-gradient(90deg, #10b981, #059669); 
+.navbar-shadow {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .navbar-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .hover-underline {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hover-underline::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #10b981, #059669);
             transition: width 0.3s ease;
         }
-        .hover-underline:hover::before { width: 100%; }
-        .logo-gradient { 
-            background: linear-gradient(135deg, #10b981, #059669, #047857); 
-            box-shadow: 0 4px 15px rgba(16,185,129,0.3);
+        
+        .hover-underline:hover::before {
+            width: 100%;
         }
-        .btn-gradient { 
-            background: linear-gradient(135deg, #10b981, #059669); 
-            box-shadow: 0 4px 15px rgba(16,185,129,0.3); 
+        
+        .logo-gradient {
+            background: linear-gradient(135deg, #10b981, #059669, #047857);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
             transition: all 0.3s ease;
         }
-        .btn-gradient:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(16,185,129,0.4);
+        
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
         }
-        .mobile-menu-slide { 
-            transform: translateY(-100%); 
+        
+        .mobile-menu-slide {
+            transform: translateY(-100%);
             transition: transform 0.3s ease;
         }
-        .mobile-menu-slide.active { transform: translateY(0); }
-        .footer-gradient { 
+        
+        .mobile-menu-slide.active {
+            transform: translateY(0);
+        }
+        
+        .footer-gradient {
             background: linear-gradient(135deg, #1f2937, #111827, #0f172a);
         }
-        .footer-card { 
-            background: rgba(255,255,255,0.05); 
-            backdrop-filter: blur(10px); 
-            border: 1px solid rgba(255,255,255,0.1); 
-            border-radius: 16px; 
-            padding: 24px; 
+        
+        .footer-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
             transition: all 0.3s ease;
         }
-        .footer-card:hover { 
-            background: rgba(255,255,255,0.08); 
+        
+        .footer-card:hover {
+            background: rgba(255, 255, 255, 0.08);
             transform: translateY(-2px);
         }
-        .social-icon { 
-            background: rgba(255,255,255,0.1); 
-            border: 1px solid rgba(255,255,255,0.2); 
+        
+        .social-icon {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
         }
-        .social-icon:hover { 
-            background: linear-gradient(135deg, #10b981, #059669); 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(16,185,129,0.3);
+        
+        .social-icon:hover {
+            background: linear-gradient(135deg, #10b981, #059669);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
         }
-        .wave-animation { 
-            background: linear-gradient(45deg, #10b981, #059669, #047857, #10b981); 
-            background-size: 400% 400%; 
+        
+        .wave-animation {
+            background: linear-gradient(45deg, #10b981, #059669, #047857, #10b981);
+            background-size: 400% 400%;
             animation: wave 3s ease-in-out infinite;
         }
-        @keyframes wave { 
-            0%,100%{background-position:0% 50%;} 
-            50%{background-position:100% 50%;}
+        
+        @keyframes wave {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
-        .notification-badge { animation: pulse 2s infinite;}
-        @keyframes pulse { 
-            0%,100%{opacity:1;} 
-            50%{opacity:0.7;} 
+        
+        .notification-badge {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
     </style>
 </head>
@@ -100,40 +132,51 @@
                         </div>
                     </a>
                 </div>
-                
+
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex flex-1 justify-center mx-6">
                     <div class="flex space-x-6 lg:space-x-8">
-                        <a href="{{ route('meal-plans') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">Meal Plans</a>
-                        <a href="{{ route('about') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">About Us</a>
-                        <a href="{{ route('menu') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">Our Menus</a>
-                        <a href="{{ route('nutrition')}}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">Nutrition Info</a>
-                        <a href="{{ route('delivery-area') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">Delivery Areas</a>
+                        <a href="{{ route('meal-plans') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                            Meal Plans
+                        </a>
+                        <a href="{{ route('about') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                            About Us
+                        </a>
+                        <a href="{{ route('menu') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                            Our Menus
+                        </a>
+                        <a href="{{ route('nutrition')}}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                            Nutrition Info
+                        </a>
+                        <a href="{{ route('delivery-area') }}" class="px-1 py-2 text-gray-700 hover:text-emerald-600 font-medium hover-underline transition-colors">
+                            Delivery Areas
+                        </a>
                     </div>
                 </div>
-                
+
                 <!-- Auth Buttons -->
                 <div class="hidden md:flex items-center space-x-4">
-                    <a href="{{ route('login') }}" class="px-3 py-2 text-gray-700 hover:text-emerald-600 font-medium transition-colors">Log in</a>
-                    <a href="{{ route('register') }}" class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-full font-medium transition-colors shadow-sm">Sign Up</a>
+                    <a href="{{ route('login') }}" class="px-3 py-2 text-gray-700 hover:text-emerald-600 font-medium transition-colors">
+                        Log in
+                    </a>
+                    <a href="{{ route('register') }}" class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-full font-medium transition-colors shadow-sm">
+                        Sign Up
+                    </a>
                 </div>
-                
+
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-emerald-600 focus:outline-none">
-                        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
-        
+
         <!-- Mobile Navigation -->
-        <div id="mobile-menu" class="md:hidden mobile-menu-slide">
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
             <div class="px-4 pt-2 pb-4 space-y-1">
                 <a href="{{ route('meal-plans') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Meal Plans</a>
                 <a href="{{ route('about') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">About Us</a>
@@ -141,24 +184,27 @@
                 <a href="{{ route('nutrition') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Nutrition Info</a>
                 <a href="{{ route('delivery-area') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Delivery Areas</a>
                 <div class="pt-2 border-t border-gray-200">
-                    <a href="{{ route('login') }}" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Log in</a>
-                    <a href="{{ route('register') }}" class="block px-3 py-3 rounded-md text-base font-medium text-center text-white bg-emerald-500 hover:bg-emerald-600">Sign Up</a>
+                    <a href="/login" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-emerald-600 hover:bg-gray-50">Log in</a>
+                    <a href="/register" class="block px-3 py-3 rounded-md text-base font-medium text-center text-white bg-emerald-500 hover:bg-emerald-600">Sign Up</a>
                 </div>
             </div>
         </div>
     </nav>
-    
+
     <!-- Main Content -->
     <main class="min-h-screen">
-        @yield('content')
+        {{ $slot }}
     </main>
-    
+
     <!-- Footer -->
     <footer class="footer-gradient text-white relative overflow-hidden">
+        <!-- Background Pattern -->
         <div class="absolute inset-0 opacity-10">
             <div class="wave-animation h-full w-full"></div>
         </div>
+        
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <!-- Main Footer Content -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 <!-- Company Info -->
                 <div class="lg:col-span-2">
@@ -176,6 +222,7 @@
                             Menyediakan makanan sehat yang dapat disesuaikan dan dikirim ke seluruh Indonesia. 
                             Membuat makan sehat menjadi mudah diakses dan nyaman untuk semua orang.
                         </p>
+                        
                         <!-- Social Media -->
                         <div class="flex space-x-4">
                             <a href="#" class="social-icon w-12 h-12 rounded-xl flex items-center justify-center">
@@ -201,37 +248,59 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Quick Links -->
                 <div class="footer-card">
                     <h3 class="text-lg font-semibold mb-6 text-emerald-400">Link Cepat</h3>
                     <ul class="space-y-3">
-                        <li><a href="{{ route('meal-plans') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Meal Plans</span></a></li>
-                        <li><a href="{{ route('menu') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Menu</span></a></li>
-                        <li><a href="{{ route('nutrition') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Panduan Nutrisi</span></a></li>
-                        <li><a href="{{ route('delivery-area') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Area Pengiriman</span></a></li>
+                        <li><a href="{{ route('meal-plans') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                            <span>Meal Plans</span>
+                        </a></li>
+                        <li><a href="{{ route('menu') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                            <span>Menu</span>
+                        </a></li>
+                        <li><a href="{{ route('nutrition') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                            <span>Panduan Nutrisi</span>
+                        </a></li>
+                        <li><a href="{{ route('delivery-area') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                            <span>Area Pengiriman</span>
+                        </a></li>
                     </ul>
                 </div>
-                
+
                 <!-- Support -->
                 <div class="footer-card">
                     <h3 class="text-lg font-semibold mb-6 text-emerald-400">Dukungan</h3>
                     <ul class="space-y-3">
-                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Pusat Bantuan</span></a></li>
-                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Hubungi Kami</span></a></li>
-                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>FAQ</span></a></li>
-                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Kebijakan Privasi</span></a></li>
-                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2"><span>Syarat Layanan</span></a></li>
+                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                            <span>Pusat Bantuan</span>
+                        </a></li>
+                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                            <span>Hubungi Kami</span>
+                        </a></li>
+                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                            <span>FAQ</span>
+                        </a></li>
+                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                            <span>Kebijakan Privasi</span>
+                        </a></li>
+                        <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-emerald-400 transition-colors flex items-center space-x-2">
+                            <span>Syarat Layanan</span>
+                        </a></li>
                     </ul>
                 </div>
             </div>
-            
+
             <!-- Bottom Section -->
             <div class="border-t border-gray-600 pt-8">
                 <div class="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
                     <div class="text-center lg:text-left">
-                        <p class="text-gray-400 text-sm">© 2024 SEA Catering. Semua hak dilindungi undang-undang.</p>
-                        <p class="text-gray-500 text-xs mt-1">Dibuat dengan ❤️ untuk Indonesia</p>
+                        <p class="text-gray-400 text-sm">
+                            © 2024 SEA Catering. Semua hak dilindungi undang-undang.
+                        </p>
+                        <p class="text-gray-500 text-xs mt-1">
+                            Dibuat dengan ❤️ untuk Indonesia
+                        </p>
                     </div>
                     <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-center">
                         <div class="flex items-center justify-center space-x-2 text-gray-400 text-sm">
@@ -249,7 +318,7 @@
             </div>
         </div>
     </footer>
-    
+
     <!-- Mobile Menu Script -->
     <script>
         const mobileMenuButton = document.getElementById('mobile-menu-button');
