@@ -17,6 +17,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'status',
+        'email_verified_at'
     ];
 
     protected $hidden = [
@@ -36,5 +38,15 @@ class User extends Authenticatable
     public function isUser()
     {
         return $this->role === 'user';
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function activeSubscriptions()
+    {
+        return $this->hasMany(Subscription::class)->where('status', 'active');
     }
 }
