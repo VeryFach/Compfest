@@ -80,10 +80,10 @@ Route::middleware(['auth'])->group(function () {
 
 // Group untuk admin
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])
-        ->name('admin.dashboard');
-    // Route lainnya untuk admin
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    // other admin routes...
 });
+
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
     ->middleware('guest')
@@ -114,5 +114,4 @@ Route :: get('/guest', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
-    Route::put('/profile', [ProfileController::class, 'update'])->name('profile');
 });

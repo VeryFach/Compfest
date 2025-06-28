@@ -23,24 +23,15 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi input
         $validator = Validator::make($request->all(), [
-            'full_name' => 'required|string|min:2|max:255',
-            'phone' => 'required|regex:/^[0-9]{10,13}$/',
+            'full_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'email' => 'nullable|email',
+            'address' => 'required|string',
             'plan' => 'required|in:diet,protein,royal',
             'meal_types' => 'required|array|min:1',
-            'meal_types.*' => 'in:breakfast,lunch,dinner',
             'delivery_days' => 'required|array|min:1',
-            'delivery_days.*' => 'in:monday,tuesday,wednesday,thursday,friday,saturday,sunday',
-            'allergies' => 'nullable|string|max:1000'
-        ], [
-            'full_name.required' => 'Nama lengkap wajib diisi',
-            'full_name.min' => 'Nama harus terdiri dari minimal 2 karakter',
-            'phone.required' => 'Nomor telepon wajib diisi',
-            'phone.regex' => 'Nomor telepon harus terdiri dari 10-13 digit angka',
-            'plan.required' => 'Silakan pilih salah satu paket berlangganan',
-            'meal_types.required' => 'Silakan pilih minimal satu jenis makanan',
-            'delivery_days.required' => 'Silakan pilih minimal satu hari pengiriman'
+            'allergies' => 'nullable|string'
         ]);
 
         if ($validator->fails()) {
@@ -61,6 +52,8 @@ class SubscriptionController extends Controller
         $subscription = Subscription::create([
             'full_name' => $request->full_name,
             'phone' => $request->phone,
+            'email' => $request->email,
+            'address' => $request->address,
             'plan' => $request->plan,
             'meal_types' => $request->meal_types,
             'delivery_days' => $request->delivery_days,

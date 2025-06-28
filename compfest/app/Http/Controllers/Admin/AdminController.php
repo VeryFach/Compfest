@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AdminController extends Controller
 {
@@ -12,8 +12,10 @@ class AdminController extends Controller
         $this->middleware(['auth', 'admin']);
     }
 
-    public function dashboard()
+    public function dashboard(): View
     {
-        return view('admin.dashboard');
+        return view('auth.admin.dashboard', [
+            'title' => 'Admin Dashboard'
+        ]);
     }
 }
