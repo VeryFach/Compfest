@@ -27,51 +27,60 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate request data
-        $validator = Validator::make($request->all(), [
-            'full_name' => 'required|string|min:2|max:255',
-            'phone' => [
-                'required',
-                'string',
-                'regex:/^[0-9]{10,13}$/',
-                'unique:subscriptions,phone'
-            ],
-            'email' => 'nullable|email|max:255',
-            'address' => 'required|string|min:10|max:1000',
-            'plan' => 'required|in:' . implode(',', array_keys(Subscription::PLANS)),
-            'meal_types' => 'required|array|min:1',
-            'meal_types.*' => 'in:' . implode(',', array_keys(Subscription::MEAL_TYPES)),
-            'delivery_days' => 'required|array|min:1',
-            'delivery_days.*' => 'in:' . implode(',', array_keys(Subscription::DELIVERY_DAYS)),
-            'allergies' => 'nullable|string|max:1000',
-            'delivery_time' => 'nullable|string|max:50',
-            'start_date' => 'nullable|date|after_or_equal:today'
-        ], [
-            'full_name.required' => 'Nama lengkap wajib diisi',
-            'full_name.min' => 'Nama lengkap minimal 2 karakter',
-            'phone.required' => 'Nomor telepon wajib diisi',
-            'phone.regex' => 'Nomor telepon harus 10-13 digit angka',
-            'phone.unique' => 'Nomor telepon sudah terdaftar',
-            'address.required' => 'Alamat pengiriman wajib diisi',
-            'address.min' => 'Alamat pengiriman minimal 10 karakter',
-            'plan.required' => 'Pilih paket berlangganan',
-            'plan.in' => 'Paket yang dipilih tidak valid',
-            'meal_types.required' => 'Pilih minimal satu jenis makanan',
-            'meal_types.min' => 'Pilih minimal satu jenis makanan',
-            'delivery_days.required' => 'Pilih minimal satu hari pengiriman',
-            'delivery_days.min' => 'Pilih minimal satu hari pengiriman',
-            'start_date.after_or_equal' => 'Tanggal mulai tidak boleh kurang dari hari ini'
+        // Log the incoming request for debugging
+        Log::info('Subscription request received', [
+            'request_data' => $request->all(),
+            'content_type' => $request->header('Content-Type'),
+            'is_json' => $request->isJson()
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Data tidak valid',
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
         try {
+            // Validate request data
+            $validator = Validator::make($request->all(), [
+                'full_name' => 'required|string|min:2|max:255',
+                'phone' => [
+                    'required',
+                    'string',
+                    'regex:/^[0-9]{10,13}$/',
+                    'unique:subscriptions,phone'
+                ],
+                'email' => 'nullable|email|max:255',
+                'address' => 'required|string|min:10|max:1000',
+                'plan' => 'required|in:' . implode(',', array_keys(Subscription::PLANS)),
+                'meal_types' => 'required|array|min:1',
+                'meal_types.*' => 'in:' . implode(',', array_keys(Subscription::MEAL_TYPES)),
+                'delivery_days' => 'required|array|min:1',
+                'delivery_days.*' => 'in:' . implode(',', array_keys(Subscription::DELIVERY_DAYS)),
+                'allergies' => 'nullable|string|max:1000',
+                'delivery_time' => 'nullable|string|max:50',
+                'start_date' => 'nullable|date|after_or_equal:today'
+            ], [
+                'full_name.required' => 'Nama lengkap wajib diisi',
+                'full_name.min' => 'Nama lengkap minimal 2 karakter',
+                'phone.required' => 'Nomor telepon wajib diisi',
+                'phone.regex' => 'Nomor telepon harus 10-13 digit angka',
+                'phone.unique' => 'Nomor telepon sudah terdaftar',
+                'address.required' => 'Alamat pengiriman wajib diisi',
+                'address.min' => 'Alamat pengiriman minimal 10 karakter',
+                'plan.required' => 'Pilih paket berlangganan',
+                'plan.in' => 'Paket yang dipilih tidak valid',
+                'meal_types.required' => 'Pilih minimal satu jenis makanan',
+                'meal_types.min' => 'Pilih minimal satu jenis makanan',
+                'delivery_days.required' => 'Pilih minimal satu hari pengiriman',
+                'delivery_days.min' => 'Pilih minimal satu hari pengiriman',
+                'start_date.after_or_equal' => 'Tanggal mulai tidak boleh kurang dari hari ini'
+            ]);
+
+            if ($validator->fails()) {
+                Log::warning('Validation failed', ['errors' => $validator->errors()]);
+                
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data tidak valid',
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
             // Additional validation for meal types and delivery days
             if (!Subscription::validateMealTypes($request->meal_types)) {
                 return response()->json([
@@ -117,21 +126,22 @@ class SubscriptionController extends Controller
             DB::commit();
 
             // Log successful subscription
-            Log::info('New subscription created', [
+            Log::info('New subscription created successfully', [
                 'subscription_id' => $subscription->id,
                 'customer' => $subscription->full_name,
                 'plan' => $subscription->plan,
                 'total_price' => $totalPrice
             ]);
 
+            // Return successful response
             return response()->json([
                 'success' => true,
                 'message' => 'Berlangganan berhasil! Tim kami akan menghubungi Anda segera untuk konfirmasi.',
                 'data' => [
                     'subscription_id' => $subscription->id,
                     'customer_name' => $subscription->full_name,
-                    'plan_name' => $subscription->plan_name,
-                    'total_price' => number_format($totalPrice, 0, ',', '.'),
+                    'plan_name' => Subscription::PLANS[$subscription->plan]['name'],
+                    'total_price' => $totalPrice,
                     'formatted_total_price' => 'Rp ' . number_format($totalPrice, 0, ',', '.'),
                     'meal_types_count' => count($request->meal_types),
                     'delivery_days_count' => count($request->delivery_days)
@@ -140,6 +150,8 @@ class SubscriptionController extends Controller
 
         } catch (\InvalidArgumentException $e) {
             DB::rollBack();
+            Log::error('Invalid argument in subscription creation', ['error' => $e->getMessage()]);
+            
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
@@ -149,12 +161,71 @@ class SubscriptionController extends Controller
             DB::rollBack();
             Log::error('Subscription creation failed', [
                 'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
                 'request_data' => $request->all()
             ]);
             
             return response()->json([
                 'success' => false,
                 'message' => 'Terjadi kesalahan sistem. Silakan coba lagi.'
+            ], 500);
+        }
+    }
+
+    /**
+     * Calculate price preview (for form)
+     */
+    public function calculatePrice(Request $request)
+    {
+        Log::info('Price calculation request', ['data' => $request->all()]);
+
+        try {
+            $validator = Validator::make($request->all(), [
+                'plan' => 'required|in:' . implode(',', array_keys(Subscription::PLANS)),
+                'meal_types' => 'required|array|min:1',
+                'delivery_days' => 'required|array|min:1'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data tidak valid untuk kalkulasi harga',
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $totalPrice = Subscription::calculateTotalPrice(
+                $request->plan,
+                $request->meal_types,
+                $request->delivery_days
+            );
+
+            Log::info('Price calculated successfully', [
+                'plan' => $request->plan,
+                'total_price' => $totalPrice
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'plan_price' => Subscription::PLANS[$request->plan]['price'],
+                    'meal_types_count' => count($request->meal_types),
+                    'delivery_days_count' => count($request->delivery_days),
+                    'weeks_per_month' => 4.3,
+                    'total_price' => $totalPrice,
+                    'formatted_total_price' => 'Rp ' . number_format($totalPrice, 0, ',', '.')
+                ]
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Price calculation failed', [
+                'error' => $e->getMessage(),
+                'request_data' => $request->all()
+            ]);
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menghitung harga. Silakan coba lagi.'
             ], 500);
         }
     }
@@ -316,11 +387,11 @@ class SubscriptionController extends Controller
                 'cancelled_subscriptions' => Subscription::where('status', 'cancelled')->count(),
                 'total_revenue' => Subscription::where('status', 'active')->sum('total_price'),
                 'plans_distribution' => Subscription::select('plan', DB::raw('count(*) as count'))
-                                                  ->groupBy('plan')
-                                                  ->get()
-                                                  ->mapWithKeys(function($item) {
-                                                      return [Subscription::PLANS[$item->plan]['name'] => $item->count];
-                                                  })
+                                              ->groupBy('plan')
+                                              ->get()
+                                              ->mapWithKeys(function($item) {
+                                                  return [Subscription::PLANS[$item->plan]['name'] => $item->count];
+                                              })
             ];
 
             return response()->json([
@@ -337,51 +408,6 @@ class SubscriptionController extends Controller
                 'success' => false,
                 'message' => 'Gagal mengambil statistik subscription'
             ], 500);
-        }
-    }
-
-    /**
-     * Calculate price preview (for form)
-     */
-    public function calculatePrice(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'plan' => 'required|in:' . implode(',', array_keys(Subscription::PLANS)),
-            'meal_types' => 'required|array|min:1',
-            'delivery_days' => 'required|array|min:1'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        try {
-            $totalPrice = Subscription::calculateTotalPrice(
-                $request->plan,
-                $request->meal_types,
-                $request->delivery_days
-            );
-
-            return response()->json([
-                'success' => true,
-                'data' => [
-                    'plan_price' => Subscription::PLANS[$request->plan]['price'],
-                    'meal_types_count' => count($request->meal_types),
-                    'delivery_days_count' => count($request->delivery_days),
-                    'weeks_per_month' => 4.3,
-                    'total_price' => $totalPrice,
-                    'formatted_total_price' => 'Rp ' . number_format($totalPrice, 0, ',', '.')
-                ]
-            ]);
-
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal menghitung harga'
-            ], 422);
         }
     }
 }

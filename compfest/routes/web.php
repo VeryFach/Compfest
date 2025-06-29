@@ -19,9 +19,9 @@ Route::get('/menu', function () {
     return view('menu', ['title' => 'Menu']);
 })->name('menu');
 
-Route::get('/subscribe', function () {
-    return view('subscribe', ['title' => 'Berlangganan']);
-})->name('subscribe');
+Route::get('/subscriptions', function () {
+    return view('subscriptions', ['title' => 'Berlangganan']);
+})->name('subscriptions');
 
 Route::get('/contact', function () {
     return view('contact', ['title' => 'Hubungi Kami']);

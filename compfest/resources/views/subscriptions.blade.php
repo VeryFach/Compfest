@@ -494,15 +494,20 @@
         <script>
             // API Configuration
             const API_CONFIG = {
-                BASE_URL: '{{ route('subscriptions.store') }}',
-                CALCULATE_URL: '{{ route('subscriptions.calculate') }}',
+                BASE_URL: '/subscriptions',  // Simplified URL
+                CALCULATE_URL: '/subscriptions/calculate-price',
                 CSRF_TOKEN: document.querySelector('meta[name="csrf-token"]')?.content || '',
                 HEADERS: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
                 }
             };
+
+            console.log('Before fetch');
+            const response = await fetch(...);
+            console.log('After fetch', response);
 
             // Subscription Plans Data
             const PLANS = @json($plans);
@@ -586,13 +591,6 @@
 
             // UI Functions
             const UI = {
-                showLoading() {
-                    DOM.loadingOverlay.style.display = 'flex';
-                },
-
-                hideLoading() {
-                    DOM.loadingOverlay.style.display = 'none';
-                },
 
                 showAlert(message, type = 'success') {
                     const alertId = `alert-${Date.now()}`;
@@ -640,7 +638,7 @@
                     if (!AppState.selectedPlan || 
                         AppState.selectedMealTypes.length === 0 || 
                         AppState.selectedDeliveryDays.length === 0) {
-                        DOM.priceDisplayElements.totalPrice.textContent = Utils.formatCurrency(0);
+                        DOM.priceDisplayElements.totalPrice.textContent = 'Rp 0';
                         return;
                     }
 
@@ -655,24 +653,41 @@
                             })
                         });
 
-                        const data = await response.json();
-
-                        if (data.success) {
-                            // Update display elements
-                            DOM.priceDisplayElements.selectedPlan.textContent = 
-                                AppState.selectedPlan ? PLANS[AppState.selectedPlan].name : '-';
+                        if (response.ok) {
+                            const data = await response.json();
                             
-                            DOM.priceDisplayElements.mealTypesCount.textContent = 
-                                AppState.selectedMealTypes.length;
-                            
-                            DOM.priceDisplayElements.deliveryDaysCount.textContent = 
-                                AppState.selectedDeliveryDays.length;
-                            
-                            DOM.priceDisplayElements.totalPrice.textContent = 
-                                data.data.formatted_total_price;
+                            if (data.success) {
+                                // Update display elements
+                                DOM.priceDisplayElements.selectedPlan.textContent = 
+                                    AppState.selectedPlan ? PLANS[AppState.selectedPlan].name : '-';
+                                
+                                DOM.priceDisplayElements.mealTypesCount.textContent = 
+                                    AppState.selectedMealTypes.length;
+                                
+                                DOM.priceDisplayElements.deliveryDaysCount.textContent = 
+                                    AppState.selectedDeliveryDays.length;
+                                
+                                DOM.priceDisplayElements.totalPrice.textContent = 
+                                    data.data.formatted_total_price;
+                            }
                         }
                     } catch (error) {
                         console.error('Price calculation error:', error);
+                        // Don't show error to user for price calculation failures
+                    }
+                },
+
+                showLoading() {
+                    const overlay = document.getElementById('loadingOverlay');
+                    if (overlay) {
+                        overlay.classList.remove('hidden');
+                    }
+                },
+
+                hideLoading() {
+                    const overlay = document.getElementById('loadingOverlay');
+                    if (overlay) {
+                        overlay.classList.add('hidden');
                     }
                 },
 
@@ -804,42 +819,86 @@
                 
                 if (!UI.validateForm()) return;
                 
-                const formData = {
-                    full_name: document.getElementById('fullName').value.trim(),
-                    phone: document.getElementById('phone').value.trim(),
-                    email: document.getElementById('email').value.trim() || null,
-                    address: document.getElementById('address').value.trim(),
-                    allergies: document.getElementById('allergies').value.trim() || null,
-                    plan: AppState.selectedPlan,
-                    meal_types: AppState.selectedMealTypes,
-                    delivery_days: AppState.selectedDeliveryDays,
-                    delivery_time: document.getElementById('deliveryTime').value || null,
-                    start_date: document.getElementById('startDate').value || null
-                };
-                
                 try {
                     AppState.isSubmitting = true;
                     UI.showLoading();
                     
-                    const response = await ApiService.postSubscription(formData);
+                    // Collect form data properly
+                    const formData = {
+                        full_name: document.getElementById('fullName').value.trim(),
+                        phone: document.getElementById('phone').value.trim(),
+                        email: document.getElementById('email').value.trim(),
+                        address: document.getElementById('address').value.trim(),
+                        allergies: document.getElementById('allergies').value.trim(),
+                        plan: AppState.selectedPlan,
+                        meal_types: AppState.selectedMealTypes,
+                        delivery_days: AppState.selectedDeliveryDays,
+                        delivery_time: document.getElementById('deliveryTime').value,
+                        start_date: document.getElementById('startDate').value
+                    };
                     
-                    if (!response.success) {
-                        throw new Error(response.message || 'Unknown error');
+                    console.log('Submitting form with data:', formData);
+                    
+                    // Setup timeout controller
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 detik timeout
+                    
+                    const response = await fetch(API_CONFIG.BASE_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify(formData),
+                        signal: controller.signal
+                    });
+                    
+                    clearTimeout(timeoutId);
+                    
+                    console.log('Response status:', response.status);
+                    
+                    const data = await response.json();
+                    console.log('Response data:', data);
+                    
+                    if (!response.ok) {
+                        if (response.status === 422 && data.errors) {
+                            // Handle validation errors
+                            Object.keys(data.errors).forEach(field => {
+                                const errorElement = document.getElementById(`${field}Error`);
+                                if (errorElement) {
+                                    errorElement.textContent = data.errors[field][0];
+                                }
+                            });
+                            UI.showAlert('Mohon periksa kembali data yang Anda masukkan', 'error');
+                        } else {
+                            throw new Error(data.message || `Server error: ${response.status}`);
+                        }
+                        return;
                     }
                     
-                    UI.showSuccessModal();
-                    UI.resetForm();
+                    if (data.success) {
+                        UI.showSuccessModal();
+                        UI.resetForm();
+                        UI.showAlert('Berlangganan berhasil! Tim kami akan menghubungi Anda segera.', 'success');
+                    } else {
+                        throw new Error(data.message || 'Unknown error occurred');
+                    }
                     
                 } catch (error) {
                     console.error('Submission error:', error);
-                    UI.showAlert(error.message || 'Terjadi kesalahan saat mengirim data. Silakan coba lagi.', 'error');
                     
-                    // Show server-side validation errors
-                    if (error.errors) {
-                        for (const [field, messages] of Object.entries(error.errors)) {
-                            UI.showError(field, messages[0]);
-                        }
+                    let errorMessage = 'Terjadi kesalahan saat mengirim data. Silakan coba lagi.';
+                    
+                    if (error.name === 'AbortError') {
+                        errorMessage = 'Request timeout. Silakan coba lagi.';
+                    } else if (error.message) {
+                        errorMessage = error.message;
                     }
+                    
+                    UI.showAlert(errorMessage, 'error');
+                    
                 } finally {
                     AppState.isSubmitting = false;
                     UI.hideLoading();

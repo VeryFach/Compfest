@@ -125,7 +125,7 @@
                 <a href="{{ route('menu') }}" class="bg-white text-green-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg">
                     <i class="fas fa-utensils mr-2"></i>View Menu
                 </a>
-                <a href="{{ route('subscribe') }}" class="glass-effect text-white hover:bg-white hover:text-green-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300 hover:scale-105">
+                <a href="{{ route('subscriptions') }}" class="glass-effect text-white hover:bg-white hover:text-green-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300 hover:scale-105">
                     <i class="fas fa-calendar-check mr-2"></i>Subscribe Now
                 </a>
             </div>
@@ -222,7 +222,7 @@
                             <li>• Fresh vegetables</li>
                             <li>• Lean protein</li>
                         </ul>
-                        <a href="{{ route('subscribe') }}" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 hover:scale-105 inline-block text-center">
+                        <a href="{{ route('subscriptions') }}" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 hover:scale-105 inline-block text-center">
                             Subscribe Now
                         </a>
                     </div>
@@ -246,7 +246,7 @@
                             <li>• Quality meat</li>
                             <li>• Fitness friendly</li>
                         </ul>
-                        <a href="{{ route('subscribe') }}" class="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 hover:scale-105 inline-block text-center">
+                        <a href="{{ route('subscriptions') }}" class="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 hover:scale-105 inline-block text-center">
                             Subscribe Now
                         </a>
                     </div>
@@ -269,7 +269,7 @@
                             <li>• Gourmet style</li>
                             <li>• Luxury experience</li>
                         </ul>
-                        <a href="{{ route('subscribe') }}" class="mt-4 w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 hover:scale-105 inline-block text-center">
+                        <a href="{{ route('subscriptions') }}" class="mt-4 w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 hover:scale-105 inline-block text-center">
                             Subscribe Now
                         </a>
                     </div>
@@ -434,7 +434,7 @@
                 </div>
                 
                 <div class="mt-12">
-                    <a href="{{ route('subscribe') }}" class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-4 px-8 rounded-lg inline-block transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    <a href="{{ route('subscriptions') }}" class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-4 px-8 rounded-lg inline-block transition-all duration-300 hover:scale-105 hover:shadow-lg">
                         <i class="fas fa-rocket mr-2"></i>Start Subscription Now
                     </a>
                 </div>
@@ -458,7 +458,7 @@
                 <a href="{{ route('menu') }}" class="bg-white text-green-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg">
                     <i class="fas fa-utensils mr-2"></i>View Menu
                 </a>
-                <a href="{{ route('subscribe') }}" class="glass-effect text-white hover:bg-white hover:text-green-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300 hover:scale-105">
+                <a href="{{ route('subscriptions') }}" class="glass-effect text-white hover:bg-white hover:text-green-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300 hover:scale-105">
                     <i class="fas fa-calendar-check mr-2"></i>Subscribe Now
                 </a>
             </div>
@@ -533,7 +533,7 @@
         }
 
         function startSubscription() {
-            window.location.href = "{{ route('subscribe') }}";
+            window.location.href = "{{ route('subscriptions') }}";
         }
 
         // Parallax effect for floating elements
