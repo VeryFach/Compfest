@@ -9,9 +9,6 @@
         <div class="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/20">
             <!-- Header -->
             <div class="text-center">
-                <div class="mx-auto h-16 w-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
-                    <i class="fas fa-user-plus text-2xl text-white"></i>
-                </div>
                 <h2 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                     Buat Akun Baru
                 </h2>
