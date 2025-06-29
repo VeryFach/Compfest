@@ -1,422 +1,194 @@
-<x-layout title="Menu & Paket - ">
-    <!DOCTYPE html>
-    <html lang="id">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Menu & Paket Makanan</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            primary: '#2563eb',
-                            secondary: '#64748b',
-                            accent: '#f59e0b',
-                            success: '#10b981',
-                            danger: '#ef4444',
-                            warning: '#f59e0b',
-                            info: '#06b6d4'
-                        },
-                        animation: {
-                            'fade-in': 'fadeIn 0.5s ease-in-out',
-                            'slide-up': 'slideUp 0.6s ease-out',
-                            'bounce-in': 'bounceIn 0.8s ease-out',
-                            'pulse-slow': 'pulse 3s ease-in-out infinite'
-                        },
-                        keyframes: {
-                            fadeIn: {
-                                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                                '100%': { opacity: '1', transform: 'translateY(0)' }
-                            },
-                            slideUp: {
-                                '0%': { opacity: '0', transform: 'translateY(30px)' },
-                                '100%': { opacity: '1', transform: 'translateY(0)' }
-                            },
-                            bounceIn: {
-                                '0%': { opacity: '0', transform: 'scale(0.3)' },
-                                '50%': { opacity: '1', transform: 'scale(1.05)' },
-                                '70%': { transform: 'scale(0.9)' },
-                                '100%': { transform: 'scale(1)' }
-                            }
-                        }
-                    }
-                }
-            }
-        </script>
-    </head>
-    <body class="bg-gray-50 min-h-screen">
-        <!-- Header Section -->
-        <section class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 text-white py-20">
-            <div class="absolute inset-0 bg-black/20"></div>
-            <div class="absolute top-0 left-0 w-full h-full">
-                <div class="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full animate-pulse-slow"></div>
-                <div class="absolute bottom-10 right-10 w-32 h-32 bg-white/5 rounded-full animate-pulse-slow"></div>
-                <div class="absolute top-1/2 left-1/3 w-16 h-16 bg-white/10 rounded-full animate-bounce"></div>
-            </div>
-            <div class="relative container mx-auto px-6 text-center">
-                <div class="animate-slide-up">
-                    <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
-                        Menu & Paket Makanan
-                    </h1>
-                    <p class="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
-                        Pilih paket makanan yang sesuai dengan kebutuhan dan selera Anda
-                    </p>
-                    <div class="flex justify-center space-x-4">
-                        <div class="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3">
-                            <i class="fas fa-utensils text-2xl mb-2"></i>
-                            <p class="text-sm">Menu Bervariasi</p>
-                        </div>
-                        <div class="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3">
-                            <i class="fas fa-leaf text-2xl mb-2"></i>
-                            <p class="text-sm">Bahan Segar</p>
-                        </div>
-                        <div class="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3">
-                            <i class="fas fa-truck text-2xl mb-2"></i>
-                            <p class="text-sm">Antar Cepat</p>
-                        </div>
+<x-layout>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu & Paket Makanan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+        .animate-fade-in { animation: fadeIn 0.5s ease-in-out; }
+        .animate-slide-up { animation: slideUp 0.6s ease-out; }
+        .animate-bounce-in { animation: bounceIn 0.8s ease-out; }
+        .animate-pulse-slow { animation: pulse 3s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header Section -->
+    <header class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 text-white py-20">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="absolute top-0 left-0 w-full h-full">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full animate-pulse-slow"></div>
+            <div class="absolute bottom-10 right-10 w-32 h-32 bg-white/5 rounded-full animate-pulse-slow"></div>
+            <div class="absolute top-1/2 left-1/3 w-16 h-16 bg-white/10 rounded-full animate-bounce"></div>
+        </div>
+        <div class="relative container mx-auto px-6 text-center">
+            <div class="animate-slide-up">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                    Menu & Paket Makanan
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
+                    Pilih paket makanan sehat dengan menu mingguan yang bervariasi sesuai kebutuhan Anda
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <div class="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3">
+                        <i class="fas fa-calendar-alt text-2xl mb-2"></i>
+                        <p class="text-sm">Menu Mingguan</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Filter Section -->
-        <section class="py-8 bg-white shadow-lg sticky top-0 z-40">
-            <div class="container mx-auto px-6">
-                <div class="flex justify-center">
-                    <div class="bg-gray-100 rounded-full p-2 flex flex-wrap justify-center gap-2">
-                        <button class="filter-btn active bg-blue-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105" data-filter="all">
-                            <i class="fas fa-th-large mr-2"></i>Semua Paket
-                        </button>
-                        <button class="filter-btn bg-transparent text-gray-600 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-green-500 hover:text-white" data-filter="ekonomis">
-                            <i class="fas fa-coins mr-2"></i>Ekonomis
-                        </button>
-                        <button class="filter-btn bg-transparent text-gray-600 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-yellow-500 hover:text-white" data-filter="premium">
-                            <i class="fas fa-crown mr-2"></i>Premium
-                        </button>
-                        <button class="filter-btn bg-transparent text-gray-600 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-green-600 hover:text-white" data-filter="vegetarian">
-                            <i class="fas fa-seedling mr-2"></i>Vegetarian
-                        </button>
-                        <button class="filter-btn bg-transparent text-gray-600 px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:bg-cyan-500 hover:text-white" data-filter="diet">
-                            <i class="fas fa-heartbeat mr-2"></i>Diet
-                        </button>
+                    <div class="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3">
+                        <i class="fas fa-leaf text-2xl mb-2"></i>
+                        <p class="text-sm">Bahan Segar</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Menu Items Section -->
-        <section class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
-            <div class="container mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="menuContainer">
-                    
-                    <!-- Paket Ekonomis -->
-                    <div class="menu-item animate-fade-in group" data-category="ekonomis">
-                        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                            <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=250&fit=crop" class="w-full h-64 object-cover" alt="Paket Ekonomis">
-                                <div class="absolute top-4 left-4">
-                                    <span class="bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                                        <i class="fas fa-coins mr-2"></i>Ekonomis
-                                    </span>
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                            <div class="p-6">
-                                <h5 class="text-xl font-bold text-gray-800 mb-3">Paket Ekonomis Harian</h5>
-                                <p class="text-gray-600 mb-4 leading-relaxed">Paket hemat dengan menu lengkap yang terdiri dari nasi, lauk pauk, sayur, dan buah segar setiap hari.</p>
-                                <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-4 mb-6 text-center">
-                                    <span class="text-3xl font-bold text-blue-600">Rp 25.000</span>
-                                    <span class="text-gray-500 text-sm">/hari</span>
-                                </div>
-                                <div class="space-y-3">
-                                    <button class="detail-btn w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105"
-                                            data-name="Paket Ekonomis Harian"
-                                            data-price="25000"
-                                            data-category="ekonomis"
-                                            data-description="Paket hemat dengan menu lengkap yang cocok untuk kebutuhan sehari-hari"
-                                            data-includes="Nasi putih, Ayam goreng/bakar, Sayur sop/capcay, Tempe/tahu goreng, Kerupuk, Buah segar, Air mineral">
-                                        <i class="fas fa-info-circle mr-2"></i>Lihat Detail
-                                    </button>
-                                    <button class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-                                        <i class="fas fa-cart-plus mr-2"></i>Berlangganan
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3">
+                        <i class="fas fa-truck text-2xl mb-2"></i>
+                        <p class="text-sm">Antar Harian</p>
                     </div>
-
-                    <!-- Paket Premium -->
-                    <div class="menu-item animate-fade-in group" data-category="premium">
-                        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden relative">
-                            <div class="absolute -top-2 -right-2 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold z-10 animate-bounce">
-                                <i class="fas fa-star mr-1"></i>TERPOPULER
-                            </div>
-                            <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=250&fit=crop" class="w-full h-64 object-cover" alt="Paket Premium">
-                                <div class="absolute top-4 left-4">
-                                    <span class="bg-yellow-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                                        <i class="fas fa-crown mr-2"></i>Premium
-                                    </span>
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                            <div class="p-6">
-                                <h5 class="text-xl font-bold text-gray-800 mb-3">Paket Premium Eksekutif</h5>
-                                <p class="text-gray-600 mb-4 leading-relaxed">Menu premium dengan variasi lengkap, porsi besar dan bahan berkualitas tinggi untuk kepuasan maksimal.</p>
-                                <div class="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-4 mb-6 text-center border-2 border-yellow-200">
-                                    <span class="text-3xl font-bold text-yellow-600">Rp 45.000</span>
-                                    <span class="text-gray-500 text-sm">/hari</span>
-                                </div>
-                                <div class="space-y-3">
-                                    <button class="detail-btn w-full bg-yellow-500 text-white py-3 rounded-xl font-semibold hover:bg-yellow-600 transition-colors duration-300 transform hover:scale-105"
-                                            data-name="Paket Premium Eksekutif"
-                                            data-price="45000"
-                                            data-category="premium"
-                                            data-description="Menu premium dengan kualitas terbaik dan variasi lengkap untuk kepuasan maksimal"
-                                            data-includes="Nasi premium, Daging sapi/ayam fillet, Seafood (ikan/udang), Sayur organik, Tempe/tahu spesial, Kerupuk premium, Buah import, Jus buah, Air mineral">
-                                        <i class="fas fa-info-circle mr-2"></i>Lihat Detail
-                                    </button>
-                                    <button class="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-                                        <i class="fas fa-cart-plus mr-2"></i>Berlangganan
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Paket Vegetarian -->
-                    <div class="menu-item animate-fade-in group" data-category="vegetarian">
-                        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                            <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=250&fit=crop" class="w-full h-64 object-cover" alt="Paket Vegetarian">
-                                <div class="absolute top-4 left-4">
-                                    <span class="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                                        <i class="fas fa-seedling mr-2"></i>Vegetarian
-                                    </span>
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                            <div class="p-6">
-                                <h5 class="text-xl font-bold text-gray-800 mb-3">Paket Vegetarian Sehat</h5>
-                                <p class="text-gray-600 mb-4 leading-relaxed">Menu khusus vegetarian dengan sayuran segar dan protein nabati berkualitas untuk hidup sehat.</p>
-                                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 mb-6 text-center">
-                                    <span class="text-3xl font-bold text-green-600">Rp 35.000</span>
-                                    <span class="text-gray-500 text-sm">/hari</span>
-                                </div>
-                                <div class="space-y-3">
-                                    <button class="detail-btn w-full bg-green-600 text-white py-3 rounded-xl font-semibold hover:bg-green-700 transition-colors duration-300 transform hover:scale-105"
-                                            data-name="Paket Vegetarian Sehat"
-                                            data-price="35000"
-                                            data-category="vegetarian"
-                                            data-description="Menu vegetarian sehat dengan sayuran organik dan protein nabati lengkap"
-                                            data-includes="Nasi merah, Sayur organik variasi, Tahu/tempe spesial, Protein nabati, Kerupuk sayur, Buah segar, Jus sayur, Air mineral">
-                                        <i class="fas fa-info-circle mr-2"></i>Lihat Detail
-                                    </button>
-                                    <button class="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-                                        <i class="fas fa-cart-plus mr-2"></i>Berlangganan
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Paket Diet -->
-                    <div class="menu-item animate-fade-in group" data-category="diet">
-                        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                            <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=250&fit=crop" class="w-full h-64 object-cover" alt="Paket Diet">
-                                <div class="absolute top-4 left-4">
-                                    <span class="bg-cyan-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                                        <i class="fas fa-heartbeat mr-2"></i>Diet
-                                    </span>
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                            <div class="p-6">
-                                <h5 class="text-xl font-bold text-gray-800 mb-3">Paket Diet Seimbang</h5>
-                                <p class="text-gray-600 mb-4 leading-relaxed">Menu khusus diet dengan kalori terkontrol dan nutrisi seimbang untuk mencapai berat badan ideal.</p>
-                                <div class="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl p-4 mb-6 text-center">
-                                    <span class="text-3xl font-bold text-cyan-600">Rp 40.000</span>
-                                    <span class="text-gray-500 text-sm">/hari</span>
-                                </div>
-                                <div class="space-y-3">
-                                    <button class="detail-btn w-full bg-cyan-500 text-white py-3 rounded-xl font-semibold hover:bg-cyan-600 transition-colors duration-300 transform hover:scale-105"
-                                            data-name="Paket Diet Seimbang"
-                                            data-price="40000"
-                                            data-category="diet"
-                                            data-description="Menu diet dengan kalori terkontrol (~500-600 kal) dan nutrisi seimbang"
-                                            data-includes="Nasi merah porsi kecil, Protein rendah lemak, Sayur rebus/kukus, Buah rendah gula, Air lemon, Suplemen (opsional)">
-                                        <i class="fas fa-info-circle mr-2"></i>Lihat Detail
-                                    </button>
-                                    <button class="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-                                        <i class="fas fa-cart-plus mr-2"></i>Berlangganan
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Paket Keluarga -->
-                    <div class="menu-item animate-fade-in group" data-category="ekonomis">
-                        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                            <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=250&fit=crop" class="w-full h-64 object-cover" alt="Paket Keluarga">
-                                <div class="absolute top-4 left-4">
-                                    <span class="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                                        <i class="fas fa-home mr-2"></i>Keluarga
-                                    </span>
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                            <div class="p-6">
-                                <h5 class="text-xl font-bold text-gray-800 mb-3">Paket Keluarga (4 Porsi)</h5>
-                                <p class="text-gray-600 mb-4 leading-relaxed">Paket hemat untuk keluarga dengan 4 porsi makanan lengkap dan variasi menu yang disukai semua anggota keluarga.</p>
-                                <div class="bg-gradient-to-r from-red-50 to-pink-50 rounded-xl p-4 mb-6 text-center">
-                                    <span class="text-3xl font-bold text-red-600">Rp 90.000</span>
-                                    <span class="text-gray-500 text-sm">/hari</span>
-                                </div>
-                                <div class="space-y-3">
-                                    <button class="detail-btn w-full bg-red-500 text-white py-3 rounded-xl font-semibold hover:bg-red-600 transition-colors duration-300 transform hover:scale-105"
-                                            data-name="Paket Keluarga (4 Porsi)"
-                                            data-price="90000"
-                                            data-category="keluarga"
-                                            data-description="Paket hemat untuk keluarga dengan 4 porsi makanan lengkap dan variasi menu"
-                                            data-includes="Nasi putih 4 porsi, Ayam goreng/bakar 4 potong, Sayur sop/capcay 4 porsi, Tempe/tahu goreng, Kerupuk, Buah segar, Air mineral 4 botol">
-                                        <i class="fas fa-info-circle mr-2"></i>Lihat Detail
-                                    </button>
-                                    <button class="w-full bg-gradient-to-r from-red-500 to-pink-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-                                        <i class="fas fa-cart-plus mr-2"></i>Berlangganan
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Paket Anak -->
-                    <div class="menu-item animate-fade-in group" data-category="ekonomis">
-                        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                            <div class="relative">
-                                <img src="https://images.unsplash.com/photo-1569420067112-b57b4f024595?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-64 object-cover" alt="Paket Anak">
-                                <div class="absolute top-4 left-4">
-                                    <span class="bg-pink-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                                        <i class="fas fa-child mr-2"></i>Anak
-                                    </span>
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                            <div class="p-6">
-                                <h5 class="text-xl font-bold text-gray-800 mb-3">Paket Anak Sehat</h5>
-                                <p class="text-gray-600 mb-4 leading-relaxed">Menu khusus anak dengan gizi seimbang dan rasa yang disukai anak-anak untuk tumbuh kembang optimal.</p>
-                                <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-4 mb-6 text-center">
-                                    <span class="text-3xl font-bold text-pink-600">Rp 20.000</span>
-                                    <span class="text-gray-500 text-sm">/hari</span>
-                                </div>
-                                <div class="space-y-3">
-                                    <button class="detail-btn w-full bg-pink-500 text-white py-3 rounded-xl font-semibold hover:bg-pink-600 transition-colors duration-300 transform hover:scale-105"
-                                            data-name="Paket Anak Sehat"
-                                            data-price="20000"
-                                            data-category="anak"
-                                            data-description="Menu khusus anak dengan gizi seimbang dan cita rasa yang disukai anak-anak"
-                                            data-includes="Nasi putih porsi anak, Ayam goreng/nugget, Sayur wortel/brokoli, Telur dadar, Buah potong, Susu kotak, Air mineral">
-                                        <i class="fas fa-info-circle mr-2"></i>Lihat Detail
-                                    </button>
-                                    <button class="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-                                        <i class="fas fa-cart-plus mr-2"></i>Berlangganan
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Detail Modal -->
-        <div id="detailModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 items-center justify-center p-4">
-            <div class="bg-white rounded-2xl max-w-4xl w-full max-h-screen overflow-y-auto animate-bounce-in">
-                <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-t-2xl">
-                    <div class="flex justify-between items-center">
-                        <h5 class="text-2xl font-bold" id="modalTitle">Detail Paket</h5>
-                        <button id="closeModal" class="text-white hover:text-gray-300 text-2xl">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop" class="w-full h-64 object-cover rounded-xl shadow-lg" alt="Package Image" id="modalImage">
-                        </div>
-                        <div>
-                            <h4 class="text-2xl font-bold text-gray-800 mb-4" id="modalTitleContent">Nama Paket</h4>
-                            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-4 mb-4">
-                                <p class="text-3xl font-bold text-blue-600" id="modalPrice">Harga</p>
-                            </div>
-                            <p class="text-gray-600 mb-6 leading-relaxed" id="modalDescription">Deskripsi paket</p>
-                            
-                            <h6 class="text-lg font-semibold text-gray-800 mb-4">Menu Termasuk:</h6>
-                            <ul id="modalIncludes" class="space-y-2 mb-6">
-                                <!-- Dynamic content -->
-                            </ul>
-                            
-                            <div class="mb-6">
-                                <h6 class="text-lg font-semibold text-gray-800 mb-3">Keunggulan:</h6>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
-                                        <i class="fas fa-check mr-1"></i>Bahan Segar
-                                    </span>
-                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
-                                        <i class="fas fa-truck mr-1"></i>Antar Cepat
-                                    </span>
-                                    <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold">
-                                        <i class="fas fa-utensils mr-1"></i>Higienis
-                                    </span>
-                                    <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">
-                                        <i class="fas fa-heart mr-1"></i>Bergizi
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-50 px-6 py-4 rounded-b-2xl flex justify-end space-x-4">
-                    <button id="closeModalBtn" class="px-6 py-3 bg-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-400 transition-colors duration-300">
-                        Tutup
-                    </button>
-                    <button class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-                        <i class="fas fa-cart-plus mr-2"></i>Berlangganan Sekarang
-                    </button>
                 </div>
             </div>
         </div>
+    </header>
 
-        <!-- Newsletter Section -->
-        <section class="py-20 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 text-white relative overflow-hidden">
-            <div class="absolute inset-0">
-                <div class="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full animate-pulse-slow"></div>
-                <div class="absolute bottom-10 right-10 w-24 h-24 bg-white/10 rounded-full animate-pulse-slow"></div>
-                <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-white/10 rounded-full animate-bounce"></div>
-            </div>
-            <div class="container mx-auto px-6 text-center relative">
-                <div class="animate-slide-up">
-                    <h3 class="text-4xl font-bold mb-6">Dapatkan Penawaran Terbaru!</h3>
-                    <p class="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
-                        Berlangganan newsletter untuk mendapatkan info promo dan menu terbaru langsung ke email Anda
-                    </p>
-                    <div class="max-w-md mx-auto">
-                        <div class="flex bg-white/20 backdrop-blur-sm rounded-2xl p-2">
-                            <input type="email" class="flex-1 bg-transparent text-white placeholder-blue-200 px-4 py-3 rounded-xl focus:outline-none" placeholder="Masukkan email Anda">
-                            <button class="bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-colors duration-300 flex items-center">
-                                <i class="fas fa-paper-plane mr-2"></i>Berlangganan
+    <main>
+        <!-- Plans Section -->
+        <section class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Pilih Paket Makanan Anda</h2>
+                    <p class="text-xl text-gray-600">Setiap paket dilengkapi dengan menu mingguan yang bervariasi dan bergizi</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <!-- Diet Plan -->
+                    <article class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden group">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=250&fit=crop" class="w-full h-64 object-cover" alt="Diet Plan" loading="lazy">
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                                    <i class="fas fa-heartbeat mr-2"></i>Diet Plan
+                                </span>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">Diet Plan</h3>
+                            <p class="text-gray-600 mb-4 leading-relaxed">Menu rendah kalori dengan porsi terkontrol, cocok untuk program penurunan berat badan dan gaya hidup sehat.</p>
+                            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 mb-6 text-center">
+                                <span class="text-3xl font-bold text-green-600">Rp 30.000</span>
+                                <span class="text-gray-500 text-sm">/meal</span>
+                            </div>
+                            <div class="space-y-3 mb-6">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    <span>Kalori terkontrol (~400-500 kal/meal)</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    <span>Tinggi protein & serat</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    <span>Rendah lemak & gula</span>
+                                </div>
+                            </div>
+                            <button class="w-full bg-green-600 text-white py-3 rounded-xl font-semibold hover:bg-green-700 transition-colors duration-300 transform hover:scale-105 menu-btn" data-plan="diet">
+                                <i class="fas fa-calendar-alt mr-2"></i>Lihat Menu Mingguan
                             </button>
                         </div>
-                    </div>
-                    <p class="text-blue-200 text-sm mt-4">
-                        <i class="fas fa-shield-alt mr-2"></i>Kami tidak akan mengirim spam. Data Anda aman bersama kami.
-                    </p>
+                    </article>
+
+                    <!-- Protein Plan -->
+                    <article class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden group relative">
+                        <div class="absolute -top-2 -right-2 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold z-10 animate-bounce">
+                            <i class="fas fa-star mr-1"></i>POPULER
+                        </div>
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=250&fit=crop" class="w-full h-64 object-cover" alt="Protein Plan" loading="lazy">
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                                    <i class="fas fa-dumbbell mr-2"></i>Protein Plan
+                                </span>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">Protein Plan</h3>
+                            <p class="text-gray-600 mb-4 leading-relaxed">Menu tinggi protein untuk membantu pembentukan otot dan pemulihan setelah olahraga, cocok untuk atlet dan fitness enthusiast.</p>
+                            <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-4 mb-6 text-center border-2 border-blue-200">
+                                <span class="text-3xl font-bold text-blue-600">Rp 40.000</span>
+                                <span class="text-gray-500 text-sm">/meal</span>
+                            </div>
+                            <div class="space-y-3 mb-6">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-check text-blue-500 mr-3"></i>
+                                    <span>Tinggi protein (~30-40g/meal)</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-check text-blue-500 mr-3"></i>
+                                    <span>Karbohidrat kompleks</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-check text-blue-500 mr-3"></i>
+                                    <span>Cocok untuk muscle building</span>
+                                </div>
+                            </div>
+                            <button class="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 menu-btn" data-plan="protein">
+                                <i class="fas fa-calendar-alt mr-2"></i>Lihat Menu Mingguan
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Royal Plan -->
+                    <article class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden group">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=250&fit=crop" class="w-full h-64 object-cover" alt="Royal Plan" loading="lazy">
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-purple-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                                    <i class="fas fa-crown mr-2"></i>Royal Plan
+                                </span>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">Royal Plan</h3>
+                            <p class="text-gray-600 mb-4 leading-relaxed">Menu premium dengan bahan-bahan berkualitas tinggi, porsi besar, dan variasi terlengkap untuk pengalaman kuliner terbaik.</p>
+                            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-4 mb-6 text-center border-2 border-purple-200">
+                                <span class="text-3xl font-bold text-purple-600">Rp 60.000</span>
+                                <span class="text-gray-500 text-sm">/meal</span>
+                            </div>
+                            <div class="space-y-3 mb-6">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-check text-purple-500 mr-3"></i>
+                                    <span>Bahan premium & organik</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-check text-purple-500 mr-3"></i>
+                                    <span>Porsi besar & variasi lengkap</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i class="fas fa-check text-purple-500 mr-3"></i>
+                                    <span>Appetizer & dessert included</span>
+                                </div>
+                            </div>
+                            <button class="w-full bg-purple-600 text-white py-3 rounded-xl font-semibold hover:bg-purple-700 transition-colors duration-300 transform hover:scale-105 menu-btn" data-plan="royal">
+                                <i class="fas fa-calendar-alt mr-2"></i>Lihat Menu Mingguan
+                            </button>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -429,144 +201,509 @@
                         <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-users text-2xl text-blue-600"></i>
                         </div>
-                        <h4 class="text-3xl font-bold text-gray-800 mb-2">1000+</h4>
-                        <p class="text-gray-600">Pelanggan Puas</p>
+                        <h4 class="text-3xl font-bold text-gray-800 mb-2">2500+</h4>
+                        <p class="text-gray-600">Pelanggan Aktif</p>
                     </div>
                     <div class="animate-fade-in">
                         <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-utensils text-2xl text-green-600"></i>
+                            <i class="fas fa-calendar-check text-2xl text-green-600"></i>
                         </div>
-                        <h4 class="text-3xl font-bold text-gray-800 mb-2">50+</h4>
-                        <p class="text-gray-600">Menu Variasi</p>
+                        <h4 class="text-3xl font-bold text-gray-800 mb-2">100+</h4>
+                        <p class="text-gray-600">Menu Mingguan</p>
                     </div>
                     <div class="animate-fade-in">
                         <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-clock text-2xl text-yellow-600"></i>
+                            <i class="fas fa-truck text-2xl text-yellow-600"></i>
                         </div>
-                        <h4 class="text-3xl font-bold text-gray-800 mb-2">30 Menit</h4>
-                        <p class="text-gray-600">Waktu Antar</p>
+                        <h4 class="text-3xl font-bold text-gray-800 mb-2">24/7</h4>
+                        <p class="text-gray-600">Layanan Antar</p>
                     </div>
                     <div class="animate-fade-in">
                         <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-star text-2xl text-purple-600"></i>
                         </div>
                         <h4 class="text-3xl font-bold text-gray-800 mb-2">4.9/5</h4>
-                        <p class="text-gray-600">Rating Pelanggan</p>
+                        <p class="text-gray-600">Rating Kepuasan</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <script>
-            // Filter functionality
-            document.addEventListener('DOMContentLoaded', function() {
-                const filterBtns = document.querySelectorAll('.filter-btn');
-                const menuItems = document.querySelectorAll('.menu-item');
-                
-                filterBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        // Remove active class from all buttons
-                        filterBtns.forEach(b => {
-                            b.classList.remove('bg-blue-600', 'text-white');
-                            b.classList.add('bg-transparent', 'text-gray-600');
-                        });
-                        
-                        // Add active class to clicked button
-                        this.classList.remove('bg-transparent', 'text-gray-600');
-                        this.classList.add('bg-blue-600', 'text-white');
-                        
-                        const filter = this.getAttribute('data-filter');
-                        
-                        menuItems.forEach((item, index) => {
-                            if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                                item.style.display = 'block';
-                                setTimeout(() => {
-                                    item.classList.add('animate-fade-in');
-                                }, index * 100);
-                            } else {
-                                item.style.display = 'none';
-                                item.classList.remove('animate-fade-in');
-                            }
-                        });
-                    });
-                });
-                
-                // Detail modal functionality
-                const detailBtns = document.querySelectorAll('.detail-btn');
-                const modal = document.getElementById('detailModal');
-                const closeModal = document.getElementById('closeModal');
-                const closeModalBtn = document.getElementById('closeModalBtn');
-                
-                detailBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const name = this.getAttribute('data-name');
-                        const price = this.getAttribute('data-price');
-                        const description = this.getAttribute('data-description');
-                        const includes = this.getAttribute('data-includes');
-                        
-                        // Update modal content
-                        document.getElementById('modalTitle').textContent = name;
-                        document.getElementById('modalTitleContent').textContent = name;
-                        document.getElementById('modalPrice').textContent = 'Rp ' + Number(price).toLocaleString('id-ID') + ' /hari';
-                        document.getElementById('modalDescription').textContent = description;
-                        
-                        // Update includes list
-                        const includesList = document.getElementById('modalIncludes');
-                        includesList.innerHTML = '';
-                        includes.split(', ').forEach(item => {
-                            const li = document.createElement('li');
-                            li.innerHTML = `<div class="flex items-center bg-gray-50 p-3 rounded-lg">
-                                            <i class="fas fa-check text-green-500 mr-3"></i>
-                                            <span class="text-gray-700">${item}</span>
-                                            </div>`;
-                            includesList.appendChild(li);
-                        });
-                        
-                        modal.classList.remove('hidden');
-                        modal.classList.add('flex');
-                        document.body.classList.add('overflow-hidden');
-                    });
-                });
-                
-                // Close modal functionality
-                [closeModal, closeModalBtn].forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        modal.classList.add('hidden');
-                        modal.classList.remove('flex');
-                        document.body.classList.remove('overflow-hidden');
-                    });
-                });
-                
-                // Close modal when clicking outside
-                modal.addEventListener('click', function(e) {
-                    if (e.target === modal) {
-                        modal.classList.add('hidden');
-                        modal.classList.remove('flex');
-                        document.body.classList.remove('overflow-hidden');
-                    }
-                });
-                
-                // Smooth scroll for better UX
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        document.querySelector(this.getAttribute('href')).scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    });
-                });
-                
-                // Add scroll effect to filter section
-                window.addEventListener('scroll', function() {
-                    const filterSection = document.querySelector('section.sticky');
-                    if (window.scrollY > 100) {
-                        filterSection.classList.add('shadow-xl');
-                    } else {
-                        filterSection.classList.remove('shadow-xl');
-                    }
+        <!-- Newsletter Section -->
+        <section class="py-20 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 text-white relative overflow-hidden">
+            <div class="absolute inset-0">
+                <div class="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full animate-pulse-slow"></div>
+                <div class="absolute bottom-10 right-10 w-24 h-24 bg-white/10 rounded-full animate-pulse-slow"></div>
+                <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-white/10 rounded-full animate-bounce"></div>
+            </div>
+            <div class="container mx-auto px-6 text-center relative">
+                <div class="animate-slide-up">
+                    <h3 class="text-4xl font-bold mb-6">Mulai Hidup Sehat Hari Ini!</h3>
+                    <p class="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+                        Bergabunglah dengan ribuan orang yang sudah merasakan manfaat menu sehat kami
+                    </p>
+                    <form class="max-w-md mx-auto">
+                        <div class="flex bg-white/20 backdrop-blur-sm rounded-2xl p-2">
+                            <input type="email" class="flex-1 bg-transparent text-white placeholder-blue-200 px-4 py-3 rounded-xl focus:outline-none" placeholder="Masukkan email Anda" required>
+                            <button type="submit" class="bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-colors duration-300 flex items-center">
+                                <i class="fas fa-paper-plane mr-2"></i>Daftar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Weekly Menu Modal -->
+    <div id="menuModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-6xl w-full max-h-screen overflow-y-auto animate-bounce-in">
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-t-2xl">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-2xl font-bold" id="modalPlanTitle">Menu Mingguan</h2>
+                    <button id="closeMenuModal" class="text-white hover:text-gray-300 text-2xl" aria-label="Close modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <!-- Meal Type Selection -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Pilih Jenis Makanan:</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <label class="flex items-center bg-orange-50 p-3 rounded-lg border border-orange-200 cursor-pointer hover:bg-orange-100 transition-colors">
+                            <input type="checkbox" class="meal-type mr-3" value="breakfast" checked>
+                            <i class="fas fa-coffee text-orange-500 mr-2"></i>
+                            <span class="font-medium text-gray-700">Sarapan</span>
+                        </label>
+                        <label class="flex items-center bg-blue-50 p-3 rounded-lg border border-blue-200 cursor-pointer hover:bg-blue-100 transition-colors">
+                            <input type="checkbox" class="meal-type mr-3" value="lunch" checked>
+                            <i class="fas fa-sun text-blue-500 mr-2"></i>
+                            <span class="font-medium text-gray-700">Makan Siang</span>
+                        </label>
+                        <label class="flex items-center bg-purple-50 p-3 rounded-lg border border-purple-200 cursor-pointer hover:bg-purple-100 transition-colors">
+                            <input type="checkbox" class="meal-type mr-3" value="dinner" checked>
+                            <i class="fas fa-moon text-purple-500 mr-2"></i>
+                            <span class="font-medium text-gray-700">Makan Malam</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Delivery Days Selection -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Pilih Hari Pengiriman:</h3>
+                    <div class="grid grid-cols-4 md:grid-cols-7 gap-2">
+                        <label class="flex flex-col items-center bg-gray-50 p-3 rounded-lg border cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            <input type="checkbox" class="delivery-day mb-2" value="monday" checked>
+                            <span class="text-sm font-medium text-gray-700">Sen</span>
+                        </label>
+                        <label class="flex flex-col items-center bg-gray-50 p-3 rounded-lg border cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            <input type="checkbox" class="delivery-day mb-2" value="tuesday" checked>
+                            <span class="text-sm font-medium text-gray-700">Sel</span>
+                        </label>
+                        <label class="flex flex-col items-center bg-gray-50 p-3 rounded-lg border cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            <input type="checkbox" class="delivery-day mb-2" value="wednesday" checked>
+                            <span class="text-sm font-medium text-gray-700">Rab</span>
+                        </label>
+                        <label class="flex flex-col items-center bg-gray-50 p-3 rounded-lg border cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            <input type="checkbox" class="delivery-day mb-2" value="thursday" checked>
+                            <span class="text-sm font-medium text-gray-700">Kam</span>
+                        </label>
+                        <label class="flex flex-col items-center bg-gray-50 p-3 rounded-lg border cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            <input type="checkbox" class="delivery-day mb-2" value="friday" checked>
+                            <span class="text-sm font-medium text-gray-700">Jum</span>
+                        </label>
+                        <label class="flex flex-col items-center bg-gray-50 p-3 rounded-lg border cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            <input type="checkbox" class="delivery-day mb-2" value="saturday" checked>
+                            <span class="text-sm font-medium text-gray-700">Sab</span>
+                        </label>
+                        <label class="flex flex-col items-center bg-gray-50 p-3 rounded-lg border cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            <input type="checkbox" class="delivery-day mb-2" value="sunday" checked>
+                            <span class="text-sm font-medium text-gray-700">Min</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Weekly Menu Display -->
+                <div id="weeklyMenuContent" class="mb-8">
+                    <!-- Content will be generated dynamically -->
+                </div>
+
+                <!-- Price Calculation -->
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Ringkasan Pesanan:</h3>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Paket:</span>
+                            <span class="font-semibold" id="selectedPlan">-</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Jenis Makanan:</span>
+                            <span class="font-semibold" id="selectedMealTypes">-</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Hari Pengiriman:</span>
+                            <span class="font-semibold" id="selectedDays">-</span>
+                        </div>
+                        <hr class="my-3">
+                        <div class="flex justify-between items-center text-lg">
+                            <span class="font-bold text-gray-800">Total per Minggu:</span>
+                            <span class="font-bold text-blue-600 text-2xl" id="totalPrice">Rp 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-6 py-4 rounded-b-2xl flex justify-between items-center">
+                <button id="closeMenuModalBtn" class="px-6 py-3 bg-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-400 transition-colors duration-300">
+                    Tutup
+                </button>
+                <button id="orderNow" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                    <i class="fas fa-cart-plus mr-2"></i>Pesan Sekarang
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Menu data
+        const menuData = {
+            diet: {
+                title: "Diet Plan Menu",
+                price: 30000,
+                breakfast: {
+                    monday: "Oatmeal dengan buah berry + Greek yogurt",
+                    tuesday: "Smoothie bowl pisang + granola",
+                    wednesday: "Telur rebus + roti gandum + alpukat",
+                    thursday: "Chia pudding + buah segar",
+                    friday: "Overnight oats + kacang almond",
+                    saturday: "Greek yogurt parfait + muesli",
+                    sunday: "Protein pancake + sirup maple"
+                },
+                lunch: {
+                    monday: "Salad ayam grilled + quinoa + sayur hijau",
+                    tuesday: "Sup sayuran + roti gandum + hummus",
+                    wednesday: "Bowl salmon + brown rice + edamame",
+                    thursday: "Chicken wrap + sayur segar + yogurt",
+                    friday: "Tuna salad + crackers gandum",
+                    saturday: "Vegetable curry + cauliflower rice",
+                    sunday: "Grilled tofu + steamed vegetables"
+                },
+                dinner: {
+                    monday: "Ikan bakar + sayur rebus + kentang rebus",
+                    tuesday: "Chicken breast + brokoli + sweet potato",
+                    wednesday: "Sup kacang merah + salad hijau",
+                    thursday: "Steamed fish + asparagus + quinoa",
+                    friday: "Turkey meatballs + zucchini noodles",
+                    saturday: "Grilled vegetables + lentil soup",
+                    sunday: "Baked cod + roasted vegetables"
+                }
+            },
+            protein: {
+                title: "Protein Plan Menu",
+                price: 40000,
+                breakfast: {
+                    monday: "Protein shake + oatmeal + banana",
+                    tuesday: "Scrambled eggs + spinach + whole grain toast",
+                    wednesday: "Greek yogurt + protein granola + berries",
+                    thursday: "Protein smoothie bowl + nuts + seeds",
+                    friday: "Egg white omelet + vegetables + cheese",
+                    saturday: "Protein pancakes + peanut butter",
+                    sunday: "Cottage cheese + fruit + nuts"
+                },
+                lunch: {
+                    monday: "Grilled chicken + brown rice + broccoli",
+                    tuesday: "Beef stir-fry + quinoa + mixed vegetables",
+                    wednesday: "Salmon fillet + sweet potato + green beans",
+                    thursday: "Turkey breast + pasta + spinach",
+                    friday: "Tuna steak + wild rice + asparagus",
+                    saturday: "Lean pork + mashed potato + carrots",
+                    sunday: "Protein bowl + chickpeas + vegetables"
+                },
+                dinner: {
+                    monday: "Grilled steak + roasted vegetables + quinoa",
+                    tuesday: "Baked chicken thigh + brown rice + steamed broccoli",
+                    wednesday: "Protein-rich lentil curry + naan + Greek yogurt",
+                    thursday: "Grilled salmon + quinoa + roasted asparagus",
+                    friday: "Beef tenderloin + mashed sweet potato + green salad",
+                    saturday: "Chicken breast + wild rice + mixed vegetables",
+                    sunday: "Turkey meatloaf + baked potato + steamed carrots"
+                }
+            },
+            royal: {
+                title: "Royal Plan Menu",
+                price: 60000,
+                breakfast: {
+                    monday: "Eggs Benedict + smoked salmon + hollandaise sauce + fresh fruit",
+                    tuesday: "French toast + maple syrup + bacon + orange juice",
+                    wednesday: "Avocado toast + poached egg + prosciutto + cappuccino",
+                    thursday: "Pancake stack + berry compote + whipped cream + coffee",
+                    friday: "Croissant + scrambled eggs + truffle + fresh juice",
+                    saturday: "Waffle + ice cream + strawberries + hot chocolate",
+                    sunday: "Full English breakfast + sausage + beans + toast"
+                },
+                lunch: {
+                    monday: "Beef Wellington + roasted vegetables + red wine jus + dessert",
+                    tuesday: "Lobster bisque + grilled prawns + garlic bread + sorbet",
+                    wednesday: "Wagyu steak + truffle mash + asparagus + chocolate mousse",
+                    thursday: "Duck confit + orange glaze + wild rice + crème brûlée",
+                    friday: "Seafood paella + mixed salad + sangria + flan",
+                    saturday: "Lamb rack + herb crust + ratatouille + tiramisu",
+                    sunday: "Prime rib + Yorkshire pudding + vegetables + cheesecake"
+                },
+                dinner: {
+                    monday: "Tuna tataki + wasabi mayo + edamame + mochi ice cream",
+                    tuesday: "Filet mignon + truffle sauce + gratin + wine pairing",
+                    wednesday: "Sea bass + lemon butter + risotto + panna cotta",
+                    thursday: "Rack of lamb + mint sauce + roasted vegetables + soufflé",
+                    friday: "Lobster thermidor + champagne + salad + macarons",
+                    saturday: "Beef short ribs + red wine reduction + sides + cake",
+                    sunday: "Whole roasted chicken + herbs + potatoes + fruit tart"
+                }
+            }
+        };
+
+        // DOM Elements
+        const modal = document.getElementById('menuModal');
+        const menuBtns = document.querySelectorAll('.menu-btn');
+        const closeModalBtns = document.querySelectorAll('#closeMenuModal, #closeMenuModalBtn');
+        const orderNowBtn = document.getElementById('orderNow');
+        
+        // State
+        let currentPlan = '';
+        let currentPlanData = {};
+
+        // Event Listeners
+        function initEventListeners() {
+            // Open modal
+            menuBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    currentPlan = this.getAttribute('data-plan');
+                    currentPlanData = menuData[currentPlan];
+                    
+                    document.getElementById('modalPlanTitle').textContent = currentPlanData.title;
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    updateMenuDisplay();
+                    updatePricingDisplay();
                 });
             });
-        </script>
-    </body>
-    </html>
+
+            // Close modal
+            closeModalBtns.forEach(btn => {
+                btn.addEventListener('click', closeModal);
+            });
+
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Update menu display when selections change
+            document.querySelectorAll('.meal-type, .delivery-day').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateMenuDisplay();
+                    updatePricingDisplay();
+                });
+            });
+
+            // Order now functionality
+            orderNowBtn.addEventListener('click', handleOrderNow);
+        }
+
+        // Functions
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function updateMenuDisplay() {
+            const selectedMealTypes = Array.from(document.querySelectorAll('.meal-type:checked')).map(cb => cb.value);
+            const selectedDays = Array.from(document.querySelectorAll('.delivery-day:checked')).map(cb => cb.value);
+            
+            const weeklyMenuContent = document.getElementById('weeklyMenuContent');
+            const dayNames = {
+                monday: 'Senin',
+                tuesday: 'Selasa', 
+                wednesday: 'Rabu',
+                thursday: 'Kamis',
+                friday: 'Jumat',
+                saturday: 'Sabtu',
+                sunday: 'Minggu'
+            };
+
+            const mealTypeNames = {
+                breakfast: 'Sarapan',
+                lunch: 'Makan Siang',
+                dinner: 'Makan Malam'
+            };
+
+            const mealTypeIcons = {
+                breakfast: 'fas fa-coffee text-orange-500',
+                lunch: 'fas fa-sun text-blue-500', 
+                dinner: 'fas fa-moon text-purple-500'
+            };
+
+            let menuHTML = '<div class="space-y-6">';
+
+            if (selectedDays.length > 0 && selectedMealTypes.length > 0) {
+                selectedDays.forEach(day => {
+                    menuHTML += `
+                        <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-200">
+                            <h4 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                                <i class="fas fa-calendar-day text-blue-600 mr-3"></i>
+                                ${dayNames[day]}
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-${selectedMealTypes.length} gap-4">
+                    `;
+
+                    selectedMealTypes.forEach(mealType => {
+                        const menuItem = currentPlanData[mealType][day];
+                        menuHTML += `
+                            <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+                                <div class="flex items-center mb-3">
+                                    <i class="${mealTypeIcons[mealType]} mr-2"></i>
+                                    <h5 class="font-semibold text-gray-700">${mealTypeNames[mealType]}</h5>
+                                </div>
+                                <p class="text-sm text-gray-600 leading-relaxed">${menuItem}</p>
+                                <div class="mt-3 text-right">
+                                    <span class="text-lg font-bold text-blue-600">Rp ${currentPlanData.price.toLocaleString('id-ID')}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    menuHTML += `
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                menuHTML = `
+                    <div class="text-center py-12">
+                        <i class="fas fa-utensils text-6xl text-gray-300 mb-4"></i>
+                        <h4 class="text-xl font-semibold text-gray-500 mb-2">Pilih Hari dan Jenis Makanan</h4>
+                        <p class="text-gray-400">Silakan pilih minimal satu hari pengiriman dan satu jenis makanan untuk melihat menu</p>
+                    </div>
+                `;
+            }
+
+            menuHTML += '</div>';
+            weeklyMenuContent.innerHTML = menuHTML;
+        }
+
+        function updatePricingDisplay() {
+            const selectedMealTypes = Array.from(document.querySelectorAll('.meal-type:checked'));
+            const selectedDays = Array.from(document.querySelectorAll('.delivery-day:checked'));
+            
+            const mealTypeNames = {
+                breakfast: 'Sarapan',
+                lunch: 'Makan Siang',
+                dinner: 'Makan Malam'
+            };
+
+            const dayNames = {
+                monday: 'Sen',
+                tuesday: 'Sel',
+                wednesday: 'Rab', 
+                thursday: 'Kam',
+                friday: 'Jum',
+                saturday: 'Sab',
+                sunday: 'Min'
+            };
+
+            // Update plan name
+            const planNames = {
+                diet: 'Diet Plan',
+                protein: 'Protein Plan', 
+                royal: 'Royal Plan'
+            };
+            document.getElementById('selectedPlan').textContent = planNames[currentPlan] || '-';
+
+            // Update meal types
+            const mealTypeText = selectedMealTypes.length > 0 
+                ? selectedMealTypes.map(cb => mealTypeNames[cb.value]).join(', ')
+                : '-';
+            document.getElementById('selectedMealTypes').textContent = mealTypeText;
+
+            // Update delivery days
+            const dayText = selectedDays.length > 0
+                ? selectedDays.map(cb => dayNames[cb.value]).join(', ')
+                : '-';
+            document.getElementById('selectedDays').textContent = dayText;
+
+            // Calculate total price
+            const totalMeals = selectedMealTypes.length * selectedDays.length;
+            const totalPrice = totalMeals * currentPlanData.price;
+            document.getElementById('totalPrice').textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+        }
+
+        function handleOrderNow() {
+            const selectedMealTypes = Array.from(document.querySelectorAll('.meal-type:checked')).map(cb => cb.value);
+            const selectedDays = Array.from(document.querySelectorAll('.delivery-day:checked')).map(cb => cb.value);
+            
+            if (selectedMealTypes.length === 0) {
+                alert('Silakan pilih minimal satu jenis makanan!');
+                return;
+            }
+            
+            if (selectedDays.length === 0) {
+                alert('Silakan pilih minimal satu hari pengiriman!');
+                return;
+            }
+            
+            const totalMeals = selectedMealTypes.length * selectedDays.length;
+            const totalPrice = totalMeals * currentPlanData.price;
+            
+            const orderSummary = `
+Pesanan Anda:
+- Paket: ${currentPlanData.title}
+- Jenis Makanan: ${selectedMealTypes.length} jenis
+- Hari Pengiriman: ${selectedDays.length} hari
+- Total Makanan: ${totalMeals} meal
+- Total Harga: Rp ${totalPrice.toLocaleString('id-ID')} per minggu
+
+Terima kasih! Tim kami akan segera menghubungi Anda.
+            `;
+            
+            alert(orderSummary);
+            closeModal();
+        }
+
+        // Initialize Intersection Observer for animations
+        function initIntersectionObserver() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-fade-in').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease-out';
+                observer.observe(el);
+            });
+        }
+
+        // Initialize the app
+        function init() {
+            initEventListeners();
+            initIntersectionObserver();
+        }
+
+        // Start the app
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
 </x-layout>
